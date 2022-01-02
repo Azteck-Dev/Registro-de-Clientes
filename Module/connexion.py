@@ -19,6 +19,13 @@ class ConnSQL:
             print(error)
 
 class AccessDB:
+    """Se encarga de manejar las interacciones con la base de datos, creando el cursor para
+    la ejecución de consultas SQL, aplicación de Commits y el cierre de dicha conexion al finalizar
+    la interacion.
+
+    Returns:
+        Cursor: Devuelve un objeto de tipo cursor.
+    """
     def __init__(self):
         self._connection = None
         self._cursor = None

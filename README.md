@@ -7,7 +7,6 @@ programa sencillo para cubrir un registro basico de un clinte, sus productos, da
 control de ingresos de los productos.
 
 ## Desarolla con el uso.
----
 1. Python 3.10
 2. Tk Interface
 3. POO

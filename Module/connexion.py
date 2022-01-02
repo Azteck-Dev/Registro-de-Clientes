@@ -34,7 +34,7 @@ class AccessDB:
         if except_val:
             self._connection.rollback()
             log.warning(f'Ocurrió un error se genero un Rollback')
-            log.error(f'{except_val}')
+            log.error(f'{except_val}\n{except_type}')
         else:
             log.info('Operacion exitosa')
             self._connection.commit()

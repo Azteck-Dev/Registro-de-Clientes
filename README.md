@@ -1,4 +1,4 @@
-# Registro-de-Clientes
+# Registro de Clientes
 
 > App para el control de Inventario de productos.
 

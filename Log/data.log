@@ -1,0 +1,40 @@
+10:08:24: INFO -<MainProcess>- [log_gen.py: <module>] ->> Prueba Exitosa
+10:08:24: WARNING -<MainProcess>- [log_gen.py: <module>] ->> Prueba Exitosa
+10:08:24: ERROR -<MainProcess>- [log_gen.py: <module>] ->> Prueba Exitosa
+10:08:24: CRITICAL -<MainProcess>- [log_gen.py: <module>] ->> Test exitoso
+10:08:40 INFO -<MainProcess>- [log_gen.py: <module>] ->> Prueba Exitosa
+10:08:40 WARNING -<MainProcess>- [log_gen.py: <module>] ->> Prueba Exitosa
+10:08:40 ERROR -<MainProcess>- [log_gen.py: <module>] ->> Prueba Exitosa
+10:08:40 CRITICAL -<MainProcess>- [log_gen.py: <module>] ->> Test exitoso
+11:12:08 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000014219753D40>
+11:12:08 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x0000014219CD47C0>
+11:12:08 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+11:13:30 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000014B21C43D40>
+11:13:30 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x0000014B221C43C0>
+11:13:30 ERROR -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un error se genero un rollback {except_val}
+11:13:53 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001B295D03D40>
+11:13:53 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001B2962843C0>
+11:13:53 ERROR -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un error se genero un rollback no such table: Clentes
+11:15:30 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001911FAA3D40>
+11:15:30 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x00000191203B4440>
+11:15:30 WARNING -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un error se genero un Rollback
+11:15:30 ERROR -<MainProcess>- [connexion.py: __exit__] ->> <class 'sqlite3.OperationalError'>: no such table: Clentes
+11:16:20 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002044E713D40>
+11:16:20 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000002044EC943C0>
+11:16:20 WARNING -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un error se genero un Rollback
+11:16:20 ERROR -<MainProcess>- [connexion.py: __exit__] ->> <class 'sqlite3.OperationalError'>:<traceback object at 0x000002044ECAAB40> no such table: Clentes
+11:17:08 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001D99AC03D40>
+11:17:08 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001D99B184440>
+11:17:08 WARNING -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un error se genero un Rollback
+11:17:08 ERROR -<MainProcess>- [connexion.py: __exit__] ->> <class 'type'>:no such table: Clentes
+11:17:41 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000024B70F93D40>
+11:17:41 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x0000024B718E4440>
+11:17:41 WARNING -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un error se genero un Rollback
+11:17:41 ERROR -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un problema:no such table: Clentes
+11:18:03 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000200B1253D40>
+11:18:03 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x00000200B1C14440>
+11:18:03 WARNING -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un error se genero un Rollback
+11:18:03 ERROR -<MainProcess>- [connexion.py: __exit__] ->> Ocurrió un problema:no such table: Clentes
+11:19:40 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002327E853D40>
+11:19:40 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000002327F174440>
+11:19:40 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa

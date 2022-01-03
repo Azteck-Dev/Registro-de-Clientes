@@ -1,4 +1,4 @@
-from log_gen import log
+from random import randint
 
 class Client:
     """Client es el encargado de generar los objetos de tipo cliente para el manejo de los datos del cliente.
@@ -27,7 +27,8 @@ class Client:
         location:str = None,
         debt:float = 0,
         balance:float  = 0,
-        date: str = None
+        date: str = None,
+        image: str = None
     ):
         self._id = id
         self._name = name.title()
@@ -39,6 +40,7 @@ class Client:
         self._debt = debt
         self._balance = balance
         self._date = date
+        self._image = image
         self._clave = self.key_gen(clave)
 
     def key_gen(self, clave: str):
@@ -49,8 +51,9 @@ class Client:
             Clave(str): Devuelve una cadena de texto, con la clave del cliente.
         """
         if not clave:
-            key = str(self._type_client[0]) + str(self._location[0]) + '-00' + str(self._id)
-            code= str(self._name[-1].upper()) + str(self._lastname[0]) + str(self._mothers[0]) + str(self._phone[0:2]) + str(self._phone[-2:])
+            dig = randint(0,2000)
+            key = str(self._type_client[0]) + str(self._location[0]) + '-' + str(dig)
+            code= str(self._name[0]) + str(self._name[-1].upper()) + str(self._lastname[0]) + str(self._mothers[0]) + str(self._phone[0:2]) + str(self._phone[-2:])
             self._clave =  key + code
             return self._clave
         else:
@@ -146,6 +149,13 @@ class Client:
     @date.setter
     def date(self, reg_date):
         self._date = reg_date
+    # Set & Get Cliente Imagen/ Logo
+    @property
+    def image(self):
+        return self._image
+    @image.setter
+    def image(self, path_img: str):
+        self._image = path_img
 
 if __name__ == '__main__':
     test = Client(

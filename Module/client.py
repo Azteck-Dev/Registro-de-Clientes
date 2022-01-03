@@ -1,3 +1,5 @@
+from log_gen import log
+
 class Client:
     """Client es el encargado de generar los objetos de tipo cliente para el manejo de los datos del cliente.
 
@@ -28,7 +30,6 @@ class Client:
         date: str = None
     ):
         self._id = id
-        self._clave = clave
         self._name = name.title()
         self._lastname = lastname.title()
         self._mothers = mothers.title()
@@ -38,20 +39,27 @@ class Client:
         self._debt = debt
         self._balance = balance
         self._date = date
+        self._clave = self.key_gen(clave)
 
-    def key_gen(self):
+    def key_gen(self, clave: str):
         """Key Gen:
         Se encarga de generar la clave del cliente.
 
         Returns:
             Clave(str): Devuelve una cadena de texto, con la clave del cliente.
         """
-        self._clave = f'{self._type_client[0]}{self._location[0]}-00{self._id}{self._name[0]}{self._name[-1].upper()}{self._lastname[0]}{self._mothers[0]}{self._phone[0:2]}{self._phone[-2:]}'
-        return self._clave
+        if not clave:
+            key = str(self._type_client[0]) + str(self._location[0]) + '-00' + str(self._id)
+            code= str(self._name[-1].upper()) + str(self._lastname[0]) + str(self._mothers[0]) + str(self._phone[0:2]) + str(self._phone[-2:])
+            self._clave =  key + code
+            return self._clave
+        else:
+            return clave
 
     def __str__(self):
         return f'''
     ID: {self._id}
+    Clave: {self._clave}
     Clase de cliente: {self._type_client}
     Tipo de cliente: {self._location}
     Cliente: {self._name} {self._lastname} {self._mothers}
@@ -68,6 +76,13 @@ class Client:
     @id.setter
     def id(self, key):
         self._id = key
+    # Set & Get atributo Clave.
+    @property
+    def clave(self):
+        return self._clave
+    @clave.setter
+    def clave(self, key):
+        self._clave = key
     # Set & Get atributo Name
     @property
     def name(self):
@@ -143,4 +158,3 @@ if __name__ == '__main__':
         location='Local'
     )
     print(test)
-    print(test.key_gen())

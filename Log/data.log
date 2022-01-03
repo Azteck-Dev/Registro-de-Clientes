@@ -327,3 +327,50 @@ can only concatenate str (not "NoneType") to str
 06:21:32 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001C43EA54540>
 06:21:32 INFO -<MainProcess>- [dao_client.py: check_point] ->> Registros encontrados: 2
 06:21:32 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:31:46 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E5669A3840>
+07:31:46 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001E566F24540>
+07:31:46 INFO -<MainProcess>- [dao_client.py: check_point] ->> Registros encontrados: 2
+07:31:46 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:34:00 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000021BF5393840>
+07:34:00 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x0000021BF5914540>
+07:34:00 INFO -<MainProcess>- [dao_client.py: check_point] ->> Registros encontrados: 2
+07:34:00 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:35:23 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E9A0623840>
+07:35:23 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001E9A0BA4540>
+07:35:23 INFO -<MainProcess>- [dao_client.py: check_point] ->> Registros encontrados: 2
+07:35:23 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:35:23 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E9A0623740>
+07:35:23 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001E9A0BA4540>
+07:35:23 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:41:56 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001EEC2F73940>
+07:41:56 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001EEC3934540>
+07:41:56 INFO -<MainProcess>- [dao_client.py: check_point] ->> Registros encontrados: 3
+07:41:56 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:41:56 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001EEC2F73840>
+07:41:56 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001EEC3934540>
+07:41:56 INFO -<MainProcess>- [dao_client.py: singup] ->> Registro completado
+07:41:56 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:44:33 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002308FE33940>
+07:44:33 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x0000023090764540>
+07:44:33 INFO -<MainProcess>- [dao_client.py: check_point] ->> Registros encontrados: 4
+07:44:33 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:44:33 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002308FE33840>
+07:44:33 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x0000023090764540>
+07:44:33 INFO -<MainProcess>- [dao_client.py: singup] ->> Cliente: PI-176AOAO1239 registrado.
+07:44:33 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:46:37 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002A9E24D3940>
+07:46:37 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000002A9E2E24540>
+07:46:37 INFO -<MainProcess>- [dao_client.py: check_point] ->> Registros encontrados: 5
+07:46:37 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:47:44 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002548C0E3940>
+07:47:44 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000002548CA44640>
+07:47:44 INFO -<MainProcess>- [dao_client.py: load_client] ->> Registe encontrado: <Client.register object at 0x2548c631cf0>
+07:47:44 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:49:03 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001EB76D23940>
+07:49:03 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x000001EB772A4640>
+07:49:03 INFO -<MainProcess>- [dao_client.py: load_client] ->> Registe encontrado: Jonathan Mesach
+07:49:03 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa
+07:49:15 INFO -<MainProcess>- [connexion.py: __enter__] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000025BA0FB3940>
+07:49:15 INFO -<MainProcess>- [connexion.py: __enter__] ->> Cursor generado <sqlite3.Cursor object at 0x0000025BA1534640>
+07:49:15 INFO -<MainProcess>- [dao_client.py: load_client] ->> Registe encontrado: CN-1702JHVS8242
+07:49:15 INFO -<MainProcess>- [connexion.py: __exit__] ->> Operacion exitosa

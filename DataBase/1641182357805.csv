@@ -1,0 +1,6 @@
+ID,C_img,Clave,Nombres,A_paterno,A_materno,Telefono,T_cliente,L_cliente,M_deuda,M_favor,F_registro
+1,Sources/clients/user_default.png,AD-000AMR6611,Admin,Root,Root,6643182311,Proveedor,Local,0,0,31-12-2021
+3,Sources/clients/user_default.png,CN-1702JHVS8242,Jonathan Mesach,Venegas,Santana,8237897342,Comprador,Nacional,0,0,12-01-2020
+4,Sources/clients/user_default.png,CL-1844DLMS6637,Daniel,Montes,NULL,6643228237,Comprador,Local,0,0,20-05-2012
+5,Sources/clients/user_default.png,PI-1776SNOO6159,Sebastian,Orozco,Sotomayor,6193452359,Proveedor,Internacional,0,0,08-10-2002
+6,Sources/clients/user_default.png,PI-176AOAO1239,Asumo,Akihiko,Senju,1239341939,Proveedor,Internacional,0,0,19-11-2018

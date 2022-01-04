@@ -5,7 +5,7 @@ file = os.path.abspath("Log/")
 
 log.basicConfig(
     level=log.INFO,
-    format="%(asctime)s %(levelname)s -<%(processName)s>- [%(filename)s: %(funcName)s] ->> %(message)s",
+    format="%(asctime)s %(levelname)s :::%(processName)s::: [%(filename)s> %(funcName)s >%(lineno)d] ->> %(message)s",
     datefmt="%I:%M:%S",
     handlers=[
         log.FileHandler(f"{file}\data.log"),

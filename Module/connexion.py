@@ -13,7 +13,7 @@ class ConnSQL:
     @classmethod
     def getconn(cls):
         try:
-            cls._conn = SQL.connect('DataBase/wallet.db3')
+            cls._conn = SQL.connect('DataBase/wallet.db')
             return cls._conn
         except Exception as error:
             print(error)
@@ -43,7 +43,7 @@ class AccessDB:
             log.warning(f'Ocurrió un error se genero un Rollback')
             log.error(f'{except_val}\n{except_type}')
         else:
-            log.info('Operacion exitosa')
+            log.info('Interaccion finalizada')
             self._connection.commit()
 
         self._cursor.close()

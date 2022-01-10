@@ -1,7 +1,8 @@
 from connexion import AccessDB
 from datetime import datetime
-from client import Client
 from log_gen import log
+from client import Client
+from notas import Notas
 
 
 class DaoClient:
@@ -183,3 +184,90 @@ class DaoClient:
                     return False
         except Exception:
             log.error(f"No se pudo borrar al registro: {id}")
+
+
+class DaoNotas:
+    _result = None
+    _data_search = None
+    _data_in = None
+
+    # Revision de el resultado de la busqueda.
+    @classmethod
+    def _check_point(cls, result: tuple):
+        if result:
+            log.info(f'Registros encontrados: {len(result)}')
+            return result
+        else:
+            log.warning(f'No se encontró ningún registro')
+            return None
+
+    # Consulta de las notas existentes de un cliente.
+    @classmethod
+    def getNotas(cls, id_nota):
+        """Obtener las notas de un cliente.
+
+        Args:
+            id_nota (str): Clave del cliente a quien pertenece la nota.
+
+        Returns:
+            tuple: Tupla de tuplas con los resultados de la consulta SQL, devolverá None si no se
+            encontró ninguna coincidencia,
+        """
+        cls._data_search = (id_nota,)
+        with AccessDB() as cursor:
+            cursor.execute('SELECT * FROM Notas WHERE id_nota = ?', cls._data_search)
+            cls._result = cursor.fetchall()
+            return cls._check_point(cls._result)
+
+    # Registrar una nota aun cliente.
+    @classmethod
+    def regNota(cls, nota: Notas):
+        """Ingreso de notas para un cliente.
+
+        Args:
+            nota (Notas): Objeto de clase Notas a ingresar a la base de datos.
+        """
+        cls._data_in = (nota.titulo, nota.nota, nota.f_ingreso, nota.id_nota)
+        try:
+            with AccessDB() as cursor:
+                cursor.execute('INSERT INTO Notas(Titulo, Nota, F_nota, id_nota) VALUES(?,?,?,?)', cls._data_in)
+                log.info(f'{cursor.rowcount} registro fue ingresado.')
+        except Exception as ex:
+            log.error(f'No se pudo realizar el registro: {ex}')
+
+    # Actualización de una nota de un cliente.
+    @classmethod
+    def noteUpdate(cls, nota: Notas):
+        """Actualizar los datos de una nota.
+
+        Args:
+            nota (Notas): Objeto de clase notas a actualizar.
+        """
+        cls._data_in = (nota.titulo, nota.nota, nota.f_ingreso ,nota.id)
+        with AccessDB() as cursor:
+            cursor.execute('UPDATE Notas SET Titulo = ?, Nota = ?, F_nota = ? WHERE id = ?', cls._data_in)
+            log.info(f'{cursor.rowcount} registro se actualizo correctamente.')
+
+
+    # Eliminar una nota de un cliente.
+    @classmethod
+    def delNote(cls,id):
+        """Eliminar una nota de un usurario.
+
+        Args:
+            id (str): Id de la nota a eliminar.
+        """
+        cls._data_search = (id,)
+        with AccessDB() as cursor:
+            cursor.execute('DELETE FROM Notas WHERE id = ?', cls._data_search)
+            log.info(f'{cursor.rowcount} registro ha sido eliminado.')
+
+
+if __name__ == "__main__":
+    test =  Notas(
+        id = '3',
+        id_nota='CN-1702JHVS8242',
+        titulo='Nota de prueba 4',
+        nota='''Case felt the edge of the bright void beyond the chain link. Case had never seen him wear the same suit twice, although his wardrobe seemed to consist entirely of meticulous reconstruction’s of garments of the bright void beyond the chain link.'''
+    )
+    notas = DaoNotas().delNote('1')

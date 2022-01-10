@@ -1,0 +1,43 @@
+02:20:29 INFO :::MainProcess::: [connexion.py> __enter__ >35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000024EA92A3A40>
+02:20:29 INFO :::MainProcess::: [connexion.py> __enter__ >37] ->> Cursor generado <sqlite3.Cursor object at 0x0000024EA9C64BC0>
+02:20:29 WARNING :::MainProcess::: [connexion.py> __exit__ >43] ->> Ocurrió un error se genero un Rollback
+02:20:29 ERROR :::MainProcess::: [connexion.py> __exit__ >44] ->> near "WHERE": syntax error
+<class 'sqlite3.OperationalError'>
+02:20:29 ERROR :::MainProcess::: [dao.py> regNota >230] ->> No se pudo realizar el registro: near "WHERE": syntax error
+02:24:52 INFO :::MainProcess::: [connexion.py> __enter__ >35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001C231AC3B40>
+02:24:52 INFO :::MainProcess::: [connexion.py> __enter__ >37] ->> Cursor generado <sqlite3.Cursor object at 0x000001C2323C47C0>
+02:24:52 INFO :::MainProcess::: [dao.py> regNota >228] ->> 1 registro fue ingresado.
+02:24:52 INFO :::MainProcess::: [connexion.py> __exit__ >46] ->> Interaccion finalizada
+02:29:36 INFO :::MainProcess::: [connexion.py> __enter__ >35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E95D7C3B40>
+02:29:36 INFO :::MainProcess::: [connexion.py> __enter__ >37] ->> Cursor generado <sqlite3.Cursor object at 0x000001E95E1647C0>
+02:29:36 INFO :::MainProcess::: [dao.py> regNota >228] ->> 1 registro fue ingresado.
+02:29:36 INFO :::MainProcess::: [connexion.py> __exit__ >46] ->> Interaccion finalizada
+02:31:14 INFO :::MainProcess::: [connexion.py> __enter__ >35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000023202683B40>
+02:31:14 INFO :::MainProcess::: [connexion.py> __enter__ >37] ->> Cursor generado <sqlite3.Cursor object at 0x0000023202F547C0>
+02:31:14 INFO :::MainProcess::: [dao.py> regNota >228] ->> 1 registro fue ingresado.
+02:31:14 INFO :::MainProcess::: [connexion.py> __exit__ >46] ->> Interaccion finalizada
+02:32:06 INFO :::MainProcess::: [connexion.py: __enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000013790AD3A40>
+02:32:06 INFO :::MainProcess::: [connexion.py: __enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000013791404BC0>
+02:32:06 INFO :::MainProcess::: [dao.py: regNota Line: 228] ->> 1 registro fue ingresado.
+02:32:06 INFO :::MainProcess::: [connexion.py: __exit__ Line: 46] ->> Interaccion finalizada
+02:33:41 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E14E1B3A40>
+02:33:41 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001E14EB54BC0>
+02:33:41 INFO :::dao.py::: [regNota Line: 228] ->> 1 registro fue ingresado.
+02:33:41 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+02:36:23 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002849F193B40>
+02:36:23 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002849FB347C0>
+02:36:23 INFO :::dao.py::: [_check_point Line: 198] ->> Registros encontrados: 4
+02:36:23 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+02:50:21 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002406F9A3B40>
+02:50:21 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002406FF24840>
+02:50:21 INFO :::dao.py::: [noteUpdate Line: 244] ->> 1 registro se actualizo correctamente.
+02:50:21 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+03:12:12 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E2B4133B40>
+03:12:12 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001E2B4A84840>
+03:12:12 WARNING :::connexion.py::: [__exit__ Line: 43] ->> Ocurrió un error se genero un Rollback
+03:12:12 ERROR :::connexion.py::: [__exit__ Line: 44] ->> no such column: F_not
+<class 'sqlite3.OperationalError'>
+03:18:02 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002A926473B40>
+03:18:02 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002A9269F4840>
+03:18:02 INFO :::dao.py::: [delNote Line: 258] ->> 1 registro ha sido eliminado.
+03:18:02 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada

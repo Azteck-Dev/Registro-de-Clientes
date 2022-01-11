@@ -15,8 +15,8 @@ class NewClient(Toplevel):
         self.geometry("500x350")
         self.resizable(0, 0)
         # Variables de acceso.
-        self.t_cliente = tk.StringVar(value='')
-        self.l_cliente = tk.StringVar(value='')
+        self.t_cliente = tk.StringVar()
+        self.l_cliente = tk.StringVar()
         # Listas de valores.
         self.index_type = ["Comprador", "Proveedor"]
         self.index_loc = ["Local", "Nacional", "Internacional"]

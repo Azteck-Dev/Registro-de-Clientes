@@ -1,0 +1,8 @@
+02:18:13 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001BF6F7F3740>
+02:18:13 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001BF7185DBC0>
+02:18:13 INFO :::dao.py::: [singup Line: 132] ->> Cliente: CN-585AMVS6623 registrado.
+02:18:13 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+02:21:45 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000027C84823740>
+02:21:45 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000027C86C6DC40>
+02:21:45 INFO :::dao.py::: [singup Line: 132] ->> Cliente: PI-1185JMVS6640 registrado.
+02:21:45 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada

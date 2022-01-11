@@ -10,9 +10,16 @@ class NewClient(Toplevel):
     def __init__(self):
         super().__init__()
         icon = os.path.abspath("Sources/icons/add.ico")
+        # Dimensiones de la ventana & colocación de la misma.
+        ancho_ventana = 500
+        alto_ventana = 350
+        x_ventana = self.winfo_screenwidth() // 2 - ancho_ventana // 2
+        y_ventana = self.winfo_screenheight() // 2 - alto_ventana // 2
+        position = f'{ancho_ventana}x{alto_ventana}+{x_ventana}+{y_ventana}'
+        # Propiedades de la ventana.
         self.title("Agregar un cliente")
         self.iconbitmap(icon)
-        self.geometry("500x350")
+        self.geometry(position)
         self.resizable(0, 0)
         # Variables de acceso.
         self.t_cliente = tk.StringVar()

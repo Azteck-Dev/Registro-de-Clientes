@@ -3,8 +3,10 @@ from datetime import datetime
 from log_gen import log
 from client import Client
 from notas import Notas
+from productos import Producto
 
 
+# DAO para el control de los datos del cliente.
 class DaoClient:
     _result = None
     _data_search = None
@@ -186,6 +188,7 @@ class DaoClient:
             log.error(f"No se pudo borrar al registro: {id}")
 
 
+# DAO para el manejo de las notas del cliente.
 class DaoNotas:
     _result = None
     _data_search = None
@@ -263,11 +266,130 @@ class DaoNotas:
             log.info(f'{cursor.rowcount} registro ha sido eliminado.')
 
 
-if __name__ == "__main__":
-    test =  Notas(
-        id = '3',
-        id_nota='CN-1702JHVS8242',
-        titulo='Nota de prueba 4',
-        nota='''Case felt the edge of the bright void beyond the chain link. Case had never seen him wear the same suit twice, although his wardrobe seemed to consist entirely of meticulous reconstruction’s of garments of the bright void beyond the chain link.'''
-    )
-    notas = DaoNotas().delNote('1')
+# DAO para el manejo de los productos por cliente.
+class DaoProduct:
+    _product_in = None
+    _products = None
+    _result = None
+
+    # Revision de el resultado de la busqueda.
+    @classmethod
+    def _check_point(cls, result: tuple):
+        if result:
+            log.info(f'Registros encontrados: {len(result)}')
+            return result
+        else:
+            log.warning(f'No se encontró ningún registro')
+            return None
+
+    # Registro de un producto en la base de datos.
+    @classmethod
+    def prod_reg(cls, prod: Producto):
+        cls._product_in = (
+            prod.id,
+            prod.prod_id,
+            prod.folio,
+            prod.name,
+            prod.description,
+            prod.cantidad,
+            prod.cost,
+            prod.f_in,
+            prod.f_out
+        )
+        with AccessDB() as cursor:
+            cursor.execute('''INSERT INTO
+                Productos(id_clave, prod_id, folio, nombre, descripcion, cantidad, costo, F_ingreso, F_out)
+                VALUES(?,?,?,?,?,?,?,?,?)''', cls._product_in
+            )
+            log.info(f'{cursor.rowcount} producto ha sido registrado')
+
+    # Busqueda de productos.
+    @classmethod
+    def search(cls, search:str = 'product', id: str = None):
+        """Busqueda de productos en la base de datos.
+
+        Args:
+            search (str, optional): Define el tipo de busqueda por producto o por cliente.(client/product). Defaults to 'product'.
+            id (str, optional): Ingresa el id correspondiente al tipo de busqueda seleccionado.. Defaults to None.
+
+        Returns:
+            (Tuple): Tupla de tuplas con los resultados obtenidos.
+        """
+        # Busqueda por producto
+        if search == 'product' and id:
+            cls._products = (id,)
+            with AccessDB() as cursor:
+                cursor.execute("SELECT * FROM Productos WHERE nombre = ?", cls._products)
+                cls._result = cursor.fetchall()
+                return cls._check_point(cls._result)
+        # Busqueda por cliente.
+        elif search == 'client'  and id:
+            cls._products = (id,)
+            with AccessDB() as cursor:
+                cursor.execute("SELECT * FROM Productos WHERE id_clave = ?", cls._products)
+                cls._result = cursor.fetchall()
+                return cls._check_point(cls._result)
+
+    # Actualizar un producto o modificarlo.
+    @classmethod
+    def prodUpdate(cls, prod: Producto, *fields):
+        """Actualización de los datos de un producto.
+
+        Args:
+            prod (Producto): Objeto de clase producto a modificar.
+            *fields: Elementos a modificar. all/name/cost/description/cantidad/out
+                ejem:
+                prodUpdate(prod,'all','cost')
+        """
+        mns = 'Registro actualizado: '
+        # Actualización de un campo en especifico.
+        for field in fields:
+            match field:
+                # Actualizar todos los campos.
+                case 'all':
+                    cls._products = (prod.name, prod.description, prod.cantidad, prod.cost, prod.f_out, prod.prod_id)
+                    with AccessDB() as cursor:
+                        cursor.execute("UPDATE Productos SET nombre = ?, descripcion = ?, cantidad = ?, costo = ?, F_out = ? WHERE prod_id = ?", cls._products)
+                        log.info(f'{cursor.rowcount} {mns} {field}')
+                # Actualizar la cantidad en inventario.
+                case 'cantidad':
+                    cls._products = (prod.cantidad, prod.prod_id)
+                    with AccessDB() as cursor:
+                        cursor.execute("UPDATE Productos SET cantidad = ? WHERE prod_id = ?", cls._products)
+                        log.info(f'{cursor.rowcount} {mns}{field}')
+                # Actualizar el precio.
+                case 'cost':
+                    cls._products = (prod.cost, prod.prod_id)
+                    with AccessDB() as cursor:
+                        cursor.execute("UPDATE Productos SET costo = ? WHERE prod_id = ?", cls._products)
+                        log.info(f'{cursor.rowcount} {mns}{field}')
+                # Actualizar la fecha de salida del producto.
+                case 'out':
+                    cls._products = (prod.f_out, prod.cantidad, prod.prod_id)
+                    with AccessDB() as cursor:
+                        cursor.execute("UPDATE Productos SET F_out = ?, cantidad = ? WHERE prod_id = ?", cls._products)
+                        log.info(f'{cursor.rowcount} {mns}{field}')
+                # Actualizar la descripcion del producto.
+                case 'description':
+                    cls._products = (prod.description, prod.prod_id)
+                    with AccessDB() as cursor:
+                        cursor.execute("UPDATE Productos SET descripcion = ? WHERE prod_id = ?", cls._products)
+                        log.info(f'{cursor.rowcount} {mns}{field}')
+                # Actualizar el nombre del producto.
+                case 'name':
+                    cls._products = (prod.name, prod.prod_id)
+                    with AccessDB() as cursor:
+                        cursor.execute("UPDATE Productos SET nombre = ? WHERE prod_id = ?", cls._products)
+                        log.info(f'{cursor.rowcount} {mns}{field}')
+                # En caso de una opción invalida.
+                case _:
+                    if field:
+                        log.warning(f'{field} no es una opción valida.')
+
+    # Eliminación de un producto.
+    @classmethod
+    def prodDel(cls, prod_id: str):
+        cls._products = (prod_id,)
+        with AccessDB() as cursor:
+            cursor.execute("DELETE FROM Productos WHERE prod_id = ?", cls._products)
+            log.info(f'{cursor.rowcount} registro ha sido eliminado.')

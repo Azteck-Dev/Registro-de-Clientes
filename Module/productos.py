@@ -1,11 +1,12 @@
 from datetime import datetime
 
 class Producto:
-    def __init__(self, id:str = None, folio: int = None, name:str = None, description:str = None, cost:float = 0, f_in:str = None, f_out: str = None, prod_id:str = None):
+    def __init__(self, id:str = None, folio: int = None, name:str = None, description:str = None, cost:float = 0, f_in:str = None, f_out: str = None, prod_id:str = None, cantidad:int = None):
         self._id = id
         self._folio = folio
         self._name = name
         self._description = description
+        self._cantidad = cantidad
         self._cost = cost
         self._f_in = f_in
         self._f_out = f_out
@@ -14,6 +15,9 @@ class Producto:
     @property
     def id(self):
         return self._id
+    @property
+    def prod_id(self):
+        return self._prod_id
     @property
     def folio(self):
         return self._folio
@@ -32,6 +36,12 @@ class Producto:
     @property
     def f_out(self):
         return self._f_out
+    @property
+    def cantidad(self):
+        return self._cantidad
+    @cantidad.setter
+    def cantidad(self, value):
+        self._cantidad = value
 
 
     def _prod_code(self, prod_id:str):
@@ -41,7 +51,7 @@ class Producto:
             key = str(self._name[0]) + '-' + str(self._id[:2])
             return key + str(self._folio)
 
-    def _dateInOut(self, type:str = 'in'):
+    def dateInOut(self, type:str = 'in'):
         dat = datetime.now()
         fecha = dat.strftime('%d-%m-%Y')
         if type == 'in':
@@ -60,6 +70,7 @@ Folio: {self._folio}
 Prod ID: {self._prod_id}
 Nombre: {self._name}
 Descripcion: {self._description}
+Cantidad: {self._cantidad}
 Costo: {self._cost}
 Ingreso: {self._f_in}
 Salida: {self._f_out}
@@ -67,7 +78,7 @@ Salida: {self._f_out}
 
 if __name__ == '__main__':
     prod = Producto('CN-1702JHVS8242','7044','Jalapeño', 'Chile verde',11.20)
-    prod._dateInOut('in')
-    prod._dateInOut('out')
+    prod.dateInOut('in')
+    prod.dateInOut('out')
     print(prod)
 

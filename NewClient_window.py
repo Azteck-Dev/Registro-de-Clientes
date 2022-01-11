@@ -1,4 +1,3 @@
-from re import sub
 from tkinter import Toplevel, messagebox, ttk, PhotoImage
 from Module.client import Client
 import tkinter as tk

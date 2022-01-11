@@ -53,7 +53,10 @@ class Client:
         if not clave:
             dig = randint(0,2000)
             key = str(self._type_client[0]) + str(self._location[0]) + '-' + str(dig)
-            code= str(self._name[0]) + str(self._name[-1].upper()) + str(self._lastname[0]) + str(self._lastname[-1].upper())+ str(self._phone[0:2]) + str(self._phone[-2:])
+            if len(self._lastname) > 0:
+                code= str(self._name[0]) + str(self._name[-1].upper()) + str(self._lastname[0]) + str(self._lastname[-1].upper())+ str(self._phone[0:2]) + str(self._phone[-2:])
+            else:
+                code= str(self._name[0]) + str(self._name[-1].upper()) + str(self._mothers[0]) + str(self._mothers[-1].upper())+ str(self._phone[0:2]) + str(self._phone[-2:])
             self._clave =  key + code
             return self._clave
         else:

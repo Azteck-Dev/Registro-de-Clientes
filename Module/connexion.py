@@ -1,4 +1,4 @@
-from log_gen import log
+from Module.log_gen import log
 import sqlite3 as SQL
 
 # Clase encargada de obtener la conexion con la base de datos.

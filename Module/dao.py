@@ -1,9 +1,9 @@
-from connexion import AccessDB
+from Module.connexion import AccessDB
 from datetime import datetime
-from log_gen import log
-from client import Client
-from notas import Notas
-from productos import Producto
+from Module.log_gen import log
+from Module.client import Client
+from Module.notas import Notas
+from Module.productos import Producto
 
 
 # DAO para el control de los datos del cliente.

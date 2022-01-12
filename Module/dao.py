@@ -40,9 +40,10 @@ class DaoClient:
         """
         # Busqueda por Nombre y Apellidos
         if name and lastname or mothers:
+            name = f'%{name}%'
             cls._data_search = (name, lastname, mothers)
             with AccessDB() as cursor:
-                cursor.execute("SELECT * FROM Clientes WHERE Nombres= ? AND (A_paterno= ? OR A_materno= ?)",cls._data_search)
+                cursor.execute("SELECT * FROM Clientes WHERE Nombres LIKE ? AND (A_paterno= ? OR A_materno= ?)",cls._data_search)
                 cls._result = cursor.fetchall()
                 return cls._check_point(cls._result)
 

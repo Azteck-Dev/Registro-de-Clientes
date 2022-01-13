@@ -29,10 +29,14 @@ class SearchWin(Toplevel):
         self.iconbitmap(icon_path)
         # Variables
         self._results = []
-        self._item = None
+        self._item= None
         # Contenido de la ventana.
         self._main_content()
         self.mainloop()
+
+    @property
+    def item(self):
+        return self._item
 
     def _main_content(self):
         # Frame principal para el contenido.
@@ -172,13 +176,13 @@ class SearchWin(Toplevel):
     def _table_insert(self, clientes:tuple):
         for data in clientes:
             result = [data.id, data.clave, data.name, data.lastname, data.mothers]
-            self.result_table.insert("", tk.END, values=result, text=data)
+            self.result_table.insert("", tk.END, values=result, text=data.id)
 
     # Obtenemos el cliente seleccionado y su objeto.
     def see(self):
         item = self.result_table.item(self.result_table.selection())
         self._item = item['text']
-        return self._item
+        self.cancel()
 
     def cancel(self):
         self.quit()

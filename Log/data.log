@@ -506,3 +506,291 @@
 04:20:42 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002B33C832A40>
 04:20:42 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
 04:20:42 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+04:56:23 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000029C18761140>
+04:56:23 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000029C1876DD40>
+04:56:23 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+04:56:23 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:06:30 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E30B149140>
+06:06:30 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001E30B14E0C0>
+06:06:30 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:06:30 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:07:23 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001DE35D19140>
+06:07:23 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001DE35D1E0C0>
+06:07:23 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:07:23 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:14:38 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001F4DD0D1140>
+06:14:38 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001F4DD0DDD40>
+06:14:38 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:14:38 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:33:24 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000193FE539240>
+06:33:24 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000193FE551D40>
+06:33:24 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:33:24 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:34:22 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002BDDC039240>
+06:34:22 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002BDDC051D40>
+06:34:22 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:34:22 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:36:19 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000279283E9240>
+06:36:19 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000027928401D40>
+06:36:19 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:36:19 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:37:13 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000258A459D240>
+06:37:13 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000258A45B1D40>
+06:37:13 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:37:13 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:42:21 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000024DA583D240>
+06:42:21 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000024DA584DE40>
+06:42:21 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:42:21 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:42:39 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000019A8BB6D240>
+06:42:39 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000019A8BB7DE40>
+06:42:39 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:42:39 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:44:04 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001FFB21ED240>
+06:44:04 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001FFB21FDE40>
+06:44:04 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:44:04 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:45:01 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001C3B0C69240>
+06:45:01 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001C3B0C7DDC0>
+06:45:01 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:45:01 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:46:10 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002B589A1D240>
+06:46:10 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002B589A2DE40>
+06:46:10 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:46:10 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:47:07 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000025ECE0D9240>
+06:47:07 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000025ECE0EDE40>
+06:47:07 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:47:07 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:48:57 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000264F4C55240>
+06:48:57 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000264F4C62240>
+06:48:57 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:48:57 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:50:05 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002A8F5995240>
+06:50:05 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002A8F59A2240>
+06:50:05 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:50:05 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:52:38 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001FB614DD240>
+06:52:38 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001FB614EDEC0>
+06:52:38 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:52:38 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:52:41 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001FB614DD340>
+06:52:41 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001FB614EDEC0>
+06:52:41 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:52:41 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:55:14 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000022656C9D240>
+06:55:14 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000022656CADE40>
+06:55:14 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:55:14 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:55:17 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000022656C9D340>
+06:55:17 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000022656CADE40>
+06:55:17 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:55:17 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:56:20 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000016C9117D240>
+06:56:20 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000016C9118DDC0>
+06:56:20 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:56:20 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:56:23 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000016C9117D340>
+06:56:23 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000016C9118DDC0>
+06:56:23 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:56:23 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:57:33 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000160BF78D240>
+06:57:33 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000160BF79DE40>
+06:57:33 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:57:33 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:57:36 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000160BF78D340>
+06:57:36 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000160BF79DE40>
+06:57:36 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:57:36 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:58:06 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000019C7F3CD240>
+06:58:06 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000019C7F3DDDC0>
+06:58:06 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:58:06 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:58:09 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000019C7F3CD340>
+06:58:09 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000019C7F3DDDC0>
+06:58:09 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:58:09 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:59:26 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E4F951D240>
+06:59:26 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001E4F952DE40>
+06:59:26 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 3
+06:59:26 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:59:29 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001E4F951D340>
+06:59:29 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001E4F952DE40>
+06:59:29 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:59:29 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:59:44 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002050CDAD240>
+06:59:44 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002050CDBDE40>
+06:59:44 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+06:59:44 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:59:47 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002050CDAD340>
+06:59:47 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002050CDBDE40>
+06:59:47 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:59:47 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:00:28 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000011FFEE7D240>
+07:00:28 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000011FFEE8DE40>
+07:00:28 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:00:28 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:00:30 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000011FFEE7D340>
+07:00:30 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000011FFEE8DE40>
+07:00:30 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:00:30 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:01:11 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001DCC39DD240>
+07:01:11 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001DCC39EDE40>
+07:01:11 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:01:11 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:01:14 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001DCC39DD340>
+07:01:14 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001DCC39EDE40>
+07:01:14 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:01:14 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:03:05 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000012D635F1240>
+07:03:05 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000012D63601D40>
+07:03:05 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:03:05 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:03:08 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000012D635F1340>
+07:03:08 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000012D63601D40>
+07:03:08 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:03:08 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:08:06 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002B5BEE61240>
+07:08:06 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002B5BEE71D40>
+07:08:06 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:08:06 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:08:08 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002B5BEE61340>
+07:08:08 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002B5BEE71D40>
+07:08:08 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:08:08 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:08:47 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002B5BB341240>
+07:08:47 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002B5BB351D40>
+07:08:47 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:08:47 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:08:49 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002B5BB341340>
+07:08:49 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002B5BB351D40>
+07:08:49 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:08:49 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:34:31 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002967F9C5140>
+07:34:31 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002967F9D1D40>
+07:34:31 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:34:31 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:34:34 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002967F9C5240>
+07:34:34 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002967F9D1D40>
+07:34:34 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:34:34 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:35:07 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001F465CC5140>
+07:35:07 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001F465CD1D40>
+07:35:07 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:35:07 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:35:10 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001F465CC5240>
+07:35:10 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001F465CD1D40>
+07:35:10 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:35:10 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:47:06 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000179EBCFD140>
+07:47:06 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000179EBD0DD40>
+07:47:06 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:47:06 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:47:09 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000179EBCFD240>
+07:47:09 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000179EBD0DD40>
+07:47:09 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:47:09 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:47:57 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001BD84D3D140>
+07:47:57 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001BD84D4DD40>
+07:47:57 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:47:57 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:48:00 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001BD84D3D240>
+07:48:00 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001BD84D4DD40>
+07:48:00 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:48:00 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:48:38 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001C1047AD140>
+07:48:38 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001C1047BDD40>
+07:48:38 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:48:38 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:48:41 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001C1047AD240>
+07:48:41 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001C1047BDD40>
+07:48:41 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:48:41 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:48:48 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001C1047AD140>
+07:48:48 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001C1047BDD40>
+07:48:48 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:48:48 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:48:51 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001C1047AD240>
+07:48:51 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001C1047BDD40>
+07:48:51 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: PI-1185JMVS6640
+07:48:51 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:04:55 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000025A0624D140>
+08:04:55 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000025A0625DD40>
+08:04:55 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:04:55 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:04:58 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000025A0624D240>
+08:04:58 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000025A0625DD40>
+08:04:58 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: PI-1185JMVS6640
+08:04:58 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:05:36 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001F12D759140>
+08:05:36 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001F12D765D40>
+08:05:36 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:05:36 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:05:38 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001F12D759240>
+08:05:38 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001F12D765D40>
+08:05:38 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: PI-1185JMVS6640
+08:05:38 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:06:50 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000020BA16E9140>
+08:06:50 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000020BA16F5D40>
+08:06:50 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:06:50 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:06:52 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000020BA16E9240>
+08:06:52 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000020BA16F5D40>
+08:06:52 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: PI-1185JMVS6640
+08:06:52 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:16:40 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000020729F39140>
+08:16:40 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000020729F41DC0>
+08:16:40 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:16:40 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:16:43 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000020729F39240>
+08:16:43 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000020729F41DC0>
+08:16:43 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+08:16:43 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:18:58 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001CC96AA9140>
+08:18:58 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001CC96AB5D40>
+08:18:58 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:18:58 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:19:01 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000001CC96AA9240>
+08:19:01 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001CC96AB5D40>
+08:19:01 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+08:19:01 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:20:02 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000026840FA9140>
+08:20:02 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000026840FB5D40>
+08:20:02 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:20:02 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:20:04 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x0000026840FA9240>
+08:20:04 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x0000026840FB5D40>
+08:20:04 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+08:20:04 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:21:14 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000164F4989140>
+08:21:14 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000164F4991DC0>
+08:21:14 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:21:14 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:21:16 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000164F4989240>
+08:21:16 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000164F4991DC0>
+08:21:16 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+08:21:16 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:23:52 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000222E7329140>
+08:23:52 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000222E7331DC0>
+08:23:52 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:23:52 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:23:55 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000222E7329240>
+08:23:55 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000222E7331DC0>
+08:23:55 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+08:23:55 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:55:27 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000290E6931140>
+08:55:27 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000290E693DD40>
+08:55:27 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:55:27 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:55:29 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000290E6931240>
+08:55:29 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000290E693DD40>
+08:55:29 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: PI-1185JMVS6640
+08:55:29 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:55:44 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000290E6931140>
+08:55:44 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000290E693DD40>
+08:55:44 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+08:55:44 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+08:55:47 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x00000290E6931240>
+08:55:47 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000290E693DD40>
+08:55:47 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+08:55:47 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada

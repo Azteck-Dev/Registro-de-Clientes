@@ -29,6 +29,7 @@ class SearchWin(Toplevel):
         self.iconbitmap(icon_path)
         # Variables
         self._results = []
+        self._item = None
         # Contenido de la ventana.
         self._main_content()
         self.mainloop()
@@ -102,9 +103,7 @@ class SearchWin(Toplevel):
         self.result_table.column("lastname", anchor='center')
         self.result_table.column("mothers", anchor='center')
         # Scrollbar para los resultados.
-        scrollbar = ttk.Scrollbar(
-            result_frame, orient=tk.VERTICAL, command=self.result_table.yview
-        )
+        scrollbar = ttk.Scrollbar(result_frame, orient=tk.VERTICAL, command=self.result_table.yview)
         self.result_table.configure(yscrollcommand=scrollbar.set)
         scrollbar.grid(row=0, column=1, sticky="NS")
         # Botones
@@ -116,24 +115,23 @@ class SearchWin(Toplevel):
             command=self.cancel,
         )
         cancel_btn.grid(row=0, column=0, padx=10, pady=5, sticky="WE")
-        see_btn = ttk.Button(
-            btn_frame, text="Ver", image=self.see_img, compound="left", command=self.see
-        )
+        see_btn = ttk.Button(btn_frame, text="Ver", image=self.see_img, compound="left", command=self.see)
         see_btn.grid(row=0, column=1, padx=10, pady=5, sticky="WE")
 
     def _search_client(self):
         # Si la lista de resultados ya contiene información se resetea.
         if self._results:
             self._results = []
-        #! TODO si la tabla ya tiene información se limpia.
-        self.result_table.delete(0, tk.END)
+        # Si la tabla ya tiene información se limpia.
+        for item in self.result_table.get_children():
+            self.result_table.delete(item)
         # Obtención de los datos proporcionados.
         nombre = self.e_name.get()
         a_paterno = self.e_lastname.get()
         a_materno = self.e_mothers.get()
         if self._check_entry(nombre, a_paterno, a_materno):
             results = DaoClient.search(
-                name=nombre.strip().title(),
+                name=nombre.title(),
                 lastname=a_paterno.strip().title(),
                 mothers=a_materno.strip().title(),
             )
@@ -167,19 +165,20 @@ class SearchWin(Toplevel):
         if args[0] or args[1] or args[2]:
             return True
         else:
-            messagebox.showerror(
-                "Campos Vacíos", "Debes introducir al menos un dato para la busqueda"
-            )
+            messagebox.showerror("Campos Vacíos", "Debes introducir al menos un dato para la busqueda")
             return False
 
     # Inserta los resultados en la tabla.
     def _table_insert(self, clientes:tuple):
         for data in clientes:
             result = [data.id, data.clave, data.name, data.lastname, data.mothers]
-            self.result_table.insert("", tk.END, values=result)
+            self.result_table.insert("", tk.END, values=result, text=data)
 
+    # Obtenemos el cliente seleccionado y su objeto.
     def see(self):
-        pass
+        item = self.result_table.item(self.result_table.selection())
+        self._item = item['text']
+        return self._item
 
     def cancel(self):
         self.quit()

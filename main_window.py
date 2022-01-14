@@ -68,13 +68,13 @@ class MainWindow(Tk):
         self.wm_minsize(width, height)
         # Propiedades del grid.
         self.rowconfigure(0, weight=1)
-        self.columnconfigure(1, weight=1)
-        self.columnconfigure(2, weight=2)
         self._side_buttons()
         self._data_client()
         self.mainloop()
 
     def _side_buttons(self):
+        """Frame donde se carga la botonera de interacion principal.
+        """
         # Frame para la botonera de opciones del app.
         btn_frame = tk.Frame(self, relief=tk.RAISED, border=2)
         btn_frame.grid(row=0, column=0, sticky="NSEW")
@@ -153,9 +153,14 @@ class MainWindow(Tk):
         self.prods_btn.grid(row=5, column=0, padx=5, pady=10, sticky="NSEW")
 
     def _data_client(self, cliente: Client = None):
+        """Encargada de crear el frame donde se visualizaran los datos del cliente.
+
+        Args:
+            cliente (Client, optional): Objeto con la información del cliente  a cargar. Defaults to None.
+        """
         # Frame donde se cargaran los datos del cliente seleccionado.
         self.data_frame = tk.LabelFrame(self, text="Cliente")
-        self.data_frame.grid(row=0, column=1, padx=5, pady=10, sticky="NSEW")
+        self.data_frame.grid(row=0, column=1, padx=5, pady=5, sticky="NSEW")
         # Si ya se selecciono un cliente se cargaran sus datos en las variables.
         if cliente:
             # Logo del cliente.
@@ -176,21 +181,12 @@ class MainWindow(Tk):
             logo = tk.Label(self.data_frame, image= self._logo, compound='center' ,bg="#fff")
             logo.config(height=120, width=120)
             logo.grid(row=0, column=0, padx=5, pady=10, rowspan=3)
-            new_state = 'active'
-            see_state = 'active'
-            del_state = 'active'
-            edit_state = 'active'
-            save_state = 'active'
         else:
             # Logo o imagen del cliente.
             logo = tk.Label(self.data_frame, text="Not Aviable",bg="#fff")
             logo.config(height=6, width=16)
             logo.grid(row=0, column=0, padx=5, pady=10, rowspan=3)
-            new_state = 'disabled'
-            see_state = 'disabled'
-            del_state = 'disabled'
-            edit_state = 'disabled'
-            save_state = 'disabled'
+
         # Datos personales del cliente.
         # Nombre(s).
         l_name = tk.Label(self.data_frame, text="Nombre(s)", font=('arial',10,'bold'), justify='right')
@@ -279,9 +275,6 @@ class MainWindow(Tk):
             width=15
         )
         self._e_balance.grid(row=5, column=3, padx=2, pady=5, sticky="NW")
-        # Separador
-        sep = ttk.Separator(self.data_frame, orient='horizontal')
-        sep.grid(row=6, column=0, padx=3,pady=5, sticky='EW', columnspan=4)
         # carga de notas.
         lab = tk.Label(
             self.data_frame,
@@ -291,7 +284,7 @@ class MainWindow(Tk):
         )
         lab.grid(row=7, column=0, padx=5, sticky="EW", columnspan=4)
         # Tabla con las notas.
-        self.tabla_notas = ttk.Treeview(self.data_frame, columns=("titulo","fecha"), show='headings', height=4)
+        self.tabla_notas = ttk.Treeview(self.data_frame, columns=("titulo","fecha"), show='headings', height=4, selectmode='browse')
         self.tabla_notas.grid(row=8, column=0,padx=7, sticky='NSEW', columnspan=4)
         # Nombre de las columnas.
         self.tabla_notas.heading("titulo", text="Titulo")
@@ -305,26 +298,43 @@ class MainWindow(Tk):
         scrollbar.grid(row=8, column=4, sticky="NS")
         # Carga de la info de las notas
         self._notes_table(self._clave.get())
-        # Botones de interacion.
-        self.see_btn = ttk.Button(self.data_frame, text="Ver", image= self._see, compound='left', state= see_state)
-        self.see_btn.grid(row=9, column=3, padx=5, pady=5, sticky='NW')
+        # Lector de eventos de selección en la tabla de notas.
+        self.tabla_notas.bind("<Double 1>", self._text_note)
+        # Funcion encargada de mostrar las notas del cliente.
+        self._widget_notes()
+
+    def _widget_notes(self):
+        """Encargada de generar la vista para las notas del cliente cada que se recarga el widget.
+        """
+        # note = self._text_note()
+        note = False
+        if note:
+            new_state = 'active'
+            del_state = 'active'
+            edit_state = 'active'
+            save_state = 'active'
+        else:
+            new_state = 'disabled'
+            del_state = 'disabled'
+            edit_state = 'disabled'
+            save_state = 'disabled'
         # Visualización de la nota.
         # Titulo.
         note_title = tk.Label(self.data_frame, text="Titulo", justify='right')
-        note_title.grid(row=10, column=0,  padx=5, pady=5 , sticky="NE")
+        note_title.grid(row=9, column=0,  padx=5, pady=5 , sticky="SE")
         self.e_note = ttk.Entry(self.data_frame, textvariable= self._title, width=30, font=('arial',10,'bold'), justify='left', state=tk.DISABLED)
-        self.e_note.grid(row=10, column=1, padx=5, pady=5, sticky='NEW', columnspan=2)
+        self.e_note.grid(row=9, column=1, padx=5, pady=5, sticky='SEW', columnspan=2)
         # Contenido de la nota.
         self.note_box = scrolledtext.ScrolledText(
             self.data_frame,
             font = ('arial',10,'bold'),
-            height = 8,
+            height = 10,
             width = 80,
             wrap = tk.WORD,
             state=tk.DISABLED,
             border = 0
         )
-        self.note_box.grid(row=11, column=0, padx=5, pady=7, columnspan=4)
+        self.note_box.grid(row=10, column=0, padx=5, pady=7, columnspan=4)
         # Boton de nueva nota.
         new_note = ttk.Button(
             self.data_frame,
@@ -333,7 +343,7 @@ class MainWindow(Tk):
             compound='left',
             state= new_state
         )
-        new_note.grid(row=12, column=0, padx=5, pady=5, sticky='EW')
+        new_note.grid(row=11, column=0, padx=5, pady=5, sticky='EW')
         # Boton para eliminar una nota
         del_btn = ttk.Button(
             self.data_frame,
@@ -342,7 +352,7 @@ class MainWindow(Tk):
             compound='left',
             state= del_state
         )
-        del_btn.grid(row=12, column=1, padx=5, pady=5, sticky='EW')
+        del_btn.grid(row=11, column=1, padx=5, pady=5, sticky='EW')
         # Boton para editar la nota.
         edit_btn = ttk.Button(
             self.data_frame,
@@ -351,7 +361,7 @@ class MainWindow(Tk):
             compound='left',
             state= edit_state
         )
-        edit_btn.grid(row=12, column=2, padx=5, pady=5, sticky='EW')
+        edit_btn.grid(row=11, column=2, padx=5, pady=5, sticky='EW')
         # Boton para guardar la nota
         save_btn = ttk.Button(
             self.data_frame,
@@ -360,9 +370,21 @@ class MainWindow(Tk):
             compound='left',
             state= save_state
         )
-        save_btn.grid(row=12, column=3, padx=5, pady=5, sticky='EW')
+        save_btn.grid(row=11, column=3, padx=5, pady=5, sticky='EW')
+
+    def _text_note(self, event):
+        # obtengo el id de la columna seleccionada.
+        linea = self.tabla_notas.identify_row(event.y)
+        elemento = self.tabla_notas.item(linea)
+        id_nota = elemento['text']
+        return False
 
     def _notes_table(self, key: str):
+        """Encargado de obtener las notas existentes del cliente y cargar info básica en la tabla para su elección.
+
+        Args:
+            key (str): clave del cliente
+        """
         if self._head_notas:
             self._head_notas = []
             it = self.tabla_notas.get_children()
@@ -381,9 +403,12 @@ class MainWindow(Tk):
                     )
                     self._cont_note.append(info)
                     self._head_notas = [info.titulo, info.f_ingreso]
-                    self.tabla_notas.insert("", tk.END, values= self._head_notas)
+                    self.tabla_notas.insert("", tk.END, values= self._head_notas, text=info.id)
 
     def _load_client(self):
+        """Encargada de la busqueda de clientes, para obtener su información, crear el objeto cliente y cargar
+        su información el widget para su manipulación.
+        """
         search = SearchWin()
         id_client = search.item
         # Si se selecciono un cliente se activan los botones para su manejo.
@@ -418,13 +443,10 @@ class MainWindow(Tk):
     def _load_prods(self):
         pass
 
-    def _load_content(self, id:int):
-        if id:
-            print(id)
-            # note = self._cont_note[id]
-            # print(note)
 
     def _clean_data(self):
+        """Encargada de la limpieza de los datos en las variables y recargar el widget.
+        """
         self._name = tk.StringVar(value= None)
         self._clave = tk.StringVar(value= None)
         self._lastname = tk.StringVar(value= None)

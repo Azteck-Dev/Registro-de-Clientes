@@ -59,6 +59,7 @@ class SearchWin(Toplevel):
         l_search.grid(row=0, column=0, padx=10, pady=10, sticky="SE")
         self.e_name = ttk.Entry(search_frame, width=20, justify="left")
         self.e_name.grid(row=0, column=1, padx=5, pady=10, sticky="SW")
+        self.e_name.focus()
         # Apellido Paterno
         l_search = tk.Label(search_frame, text="A.Paterno", font=("arial", 10, "bold"))
         l_search.grid(row=0, column=2, padx=10, pady=10, sticky="SE")
@@ -92,6 +93,7 @@ class SearchWin(Toplevel):
             columns=("id","clave", "name", "lastname", "mothers"),
             height=13,
             show="headings",
+            selectmode='browse'
         )
         self.result_table.grid(row=0, column=0, padx=10, pady=10, sticky="NSEW")
         # Titulo de los campos de la tabla

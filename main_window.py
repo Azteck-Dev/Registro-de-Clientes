@@ -1,4 +1,4 @@
-from tkinter import  PhotoImage, Tk, messagebox, scrolledtext, ttk
+from tkinter import PhotoImage, Tk, messagebox, scrolledtext, ttk
 from search_window import SearchWin
 from NewClient_window import NewClient
 from Module.client import Client
@@ -163,6 +163,7 @@ class MainWindow(Tk):
         self.data_frame.grid(row=0, column=1, padx=5, pady=5, sticky="NSEW")
         # Si ya se selecciono un cliente se cargaran sus datos en las variables.
         if cliente:
+            flag = True
             # Logo del cliente.
             logo_img = os.path.abspath(cliente.image)
             self._logo = PhotoImage(file= logo_img)
@@ -182,6 +183,7 @@ class MainWindow(Tk):
             logo.config(height=120, width=120)
             logo.grid(row=0, column=0, padx=5, pady=10, rowspan=3)
         else:
+            flag = False
             # Logo o imagen del cliente.
             logo = tk.Label(self.data_frame, text="Not Aviable",bg="#fff")
             logo.config(height=6, width=16)
@@ -301,18 +303,21 @@ class MainWindow(Tk):
         # Lector de eventos de selección en la tabla de notas.
         self.tabla_notas.bind("<Double 1>", self._text_note)
         # Funcion encargada de mostrar las notas del cliente.
-        self._widget_notes()
+        self._widget_notes(flag=flag)
 
-    def _widget_notes(self):
-        """Encargada de generar la vista para las notas del cliente cada que se recarga el widget.
-        """
-        # note = self._text_note()
-        note = False
+    def _widget_notes(self, flag: bool, note: Notas = None):
+        """Encargada de generar la vista para las notas del cliente cada que se recarga el widget."""
         if note:
-            new_state = 'active'
-            del_state = 'active'
-            edit_state = 'active'
-            save_state = 'active'
+            new_state = 'normal'
+            del_state = 'normal'
+            edit_state = 'normal'
+            save_state = 'disabled'
+            self._content = note.nota
+        elif flag:
+            new_state = 'normal'
+            del_state = 'disabled'
+            edit_state = 'disabled'
+            save_state = 'disabled'
         else:
             new_state = 'disabled'
             del_state = 'disabled'
@@ -335,6 +340,13 @@ class MainWindow(Tk):
             border = 0
         )
         self.note_box.grid(row=10, column=0, padx=5, pady=7, columnspan=4)
+        # Carga de la nota en la caja de texto.
+        if note:
+            self.note_box.config(state='normal')
+            if self.note_box.get('1.0', tk.END):
+                self.note_box.delete('1.0',tk.END)
+            self.note_box.insert(tk.INSERT, self._content)
+            self.note_box.config(state=tk.DISABLED)
         # Boton de nueva nota.
         new_note = ttk.Button(
             self.data_frame,
@@ -377,7 +389,18 @@ class MainWindow(Tk):
         linea = self.tabla_notas.identify_row(event.y)
         elemento = self.tabla_notas.item(linea)
         id_nota = elemento['text']
-        return False
+        data = DaoNotas.getNote(id_nota)
+        if data:
+            nota = Notas(
+                id= data[0],
+                id_nota= data[1],
+                f_ingreso= data[2],
+                titulo= data[3],
+                nota= data[4]
+            )
+            self._widget_notes(note=nota, flag=True)
+        else:
+            return False
 
     def _notes_table(self, key: str):
         """Encargado de obtener las notas existentes del cliente y cargar info básica en la tabla para su elección.

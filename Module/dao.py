@@ -205,6 +205,15 @@ class DaoNotas:
             log.warning(f'No se encontró ningún registro')
             return None
 
+    # Busqueda de Nota.
+    @classmethod
+    def getNote(cls, id_note):
+        cls._data_search = (id_note,)
+        with AccessDB() as cursor:
+            cursor.execute("SELECT * FROM Notas WHERE id = ?", cls._data_search)
+            cls._result = cursor.fetchone()
+            return cls._check_point(cls._result)
+
     # Consulta de las notas existentes de un cliente.
     @classmethod
     def getNotas(cls, id_nota):

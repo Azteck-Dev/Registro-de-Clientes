@@ -886,3 +886,95 @@
 11:26:47 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000001B15B6760C0>
 11:26:47 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
 11:26:47 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:13:17 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002936474D340>
+06:13:17 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000293647660C0>
+06:13:17 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+06:13:17 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:13:20 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002936474D440>
+06:13:20 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000293647660C0>
+06:13:20 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+06:13:20 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:13:20 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002936474D340>
+06:13:20 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000293647660C0>
+06:13:20 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 4
+06:13:20 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:13:21 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002936474D440>
+06:13:21 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000293647660C0>
+06:13:21 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+06:13:21 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:13:22 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002936474D340>
+06:13:22 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000293647660C0>
+06:13:22 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+06:13:22 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+06:13:23 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002936474D440>
+06:13:23 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x00000293647660C0>
+06:13:23 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+06:13:23 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:01 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D340>
+07:09:01 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:01 INFO :::dao.py::: [_check_point Line: 19] ->> Registros encontrados: 1
+07:09:01 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:04 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D440>
+07:09:04 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:04 INFO :::dao.py::: [load_client Line: 92] ->> Registe encontrado: CN-1702JHVS8242
+07:09:04 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:04 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D340>
+07:09:04 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:04 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 4
+07:09:04 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:05 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D440>
+07:09:05 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:05 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+07:09:05 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:06 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D340>
+07:09:06 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:06 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+07:09:06 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:08 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D440>
+07:09:08 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:08 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+07:09:08 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:08 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D340>
+07:09:08 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:08 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+07:09:08 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:09 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D440>
+07:09:09 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:09 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+07:09:09 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:10 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D340>
+07:09:10 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:10 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+07:09:10 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:09:11 INFO :::connexion.py::: [__enter__ Line: 35] ->> Conexion Exitosa <sqlite3.Connection object at 0x000002959CE1D440>
+07:09:11 INFO :::connexion.py::: [__enter__ Line: 37] ->> Cursor generado <sqlite3.Cursor object at 0x000002959CE360C0>
+07:09:11 INFO :::dao.py::: [_check_point Line: 202] ->> Registros encontrados: 5
+07:09:11 INFO :::connexion.py::: [__exit__ Line: 46] ->> Interaccion finalizada
+07:18:43 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:19:01 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:22:03 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:22:05 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:22:14 WARNING :::dao.py::: [_check_point Line: 22] ->> No se encontró ningún registro
+07:23:00 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:23:14 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:23:38 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:40:31 WARNING :::dao.py::: [_check_point Line: 22] ->> No se encontró ningún registro
+07:40:40 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:40:42 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:40:42 WARNING :::dao.py::: [_check_point Line: 205] ->> No se encontró ningún registro
+07:45:08 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+07:52:20 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+07:53:26 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+07:55:52 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+07:57:02 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+07:57:12 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+08:23:57 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+08:27:07 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+08:28:41 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+08:29:57 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+08:40:07 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+08:55:11 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+09:05:14 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+09:33:18 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+09:43:52 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+09:45:32 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar

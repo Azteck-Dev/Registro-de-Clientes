@@ -41,6 +41,7 @@ class MainWindow(Tk):
         self._head_notas = []
         self._cont_note = []
         self._content = None
+        self._id = tk.StringVar(value= None)
         self._name = tk.StringVar(value= None)
         self._clave = tk.StringVar(value= None)
         self._lastname = tk.StringVar(value= None)
@@ -168,6 +169,7 @@ class MainWindow(Tk):
             logo_img = os.path.abspath(cliente.image)
             self._logo = PhotoImage(file= logo_img)
             # Variables.
+            self._id = tk.StringVar(value= cliente.id)
             self._clave = tk.StringVar(value= cliente.clave)
             self._name = tk.StringVar(value= cliente.name)
             self._lastname = tk.StringVar(value= cliente.lastname)
@@ -308,26 +310,34 @@ class MainWindow(Tk):
     def _widget_notes(self, flag: bool, note: Notas = None):
         """Encargada de generar la vista para las notas del cliente cada que se recarga el widget."""
         if note:
-            new_state = 'normal'
-            del_state = 'normal'
-            edit_state = 'normal'
-            save_state = 'disabled'
+            new_state = tk.NORMAL
+            del_state = tk.NORMAL
+            edit_state = tk.NORMAL
+            save_state = tk.DISABLED
+            self._title = note.titulo
             self._content = note.nota
         elif flag:
-            new_state = 'normal'
-            del_state = 'disabled'
-            edit_state = 'disabled'
-            save_state = 'disabled'
+            new_state = tk.NORMAL
+            del_state = tk.DISABLED
+            edit_state = tk.DISABLED
+            save_state = tk.DISABLED
         else:
-            new_state = 'disabled'
-            del_state = 'disabled'
-            edit_state = 'disabled'
-            save_state = 'disabled'
+            new_state = tk.DISABLED
+            del_state = tk.DISABLED
+            edit_state = tk.DISABLED
+            save_state = tk.DISABLED
         # Visualización de la nota.
         # Titulo.
         note_title = tk.Label(self.data_frame, text="Titulo", justify='right')
         note_title.grid(row=9, column=0,  padx=5, pady=5 , sticky="SE")
         self.e_note = ttk.Entry(self.data_frame, textvariable= self._title, width=30, font=('arial',10,'bold'), justify='left', state=tk.DISABLED)
+        # Si se selecciono una nota se activa la caja de texto e inserta el titulo de la nota.
+        if note:
+            self.e_note.config(state=tk.NORMAL)
+            if self.e_note.get():
+                self.e_note.delete(0, tk.END)
+            self.e_note.insert(tk.END,self._title)
+            self.e_note.config(state= tk.DISABLED)
         self.e_note.grid(row=9, column=1, padx=5, pady=5, sticky='SEW', columnspan=2)
         # Contenido de la nota.
         self.note_box = scrolledtext.ScrolledText(
@@ -348,42 +358,45 @@ class MainWindow(Tk):
             self.note_box.insert(tk.INSERT, self._content)
             self.note_box.config(state=tk.DISABLED)
         # Boton de nueva nota.
-        new_note = ttk.Button(
+        self.new_note_btn = ttk.Button(
             self.data_frame,
             text="Nueva",
             image= self._add_note,
             compound='left',
-            state= new_state
+            state= new_state,
+            command= self._create_note
         )
-        new_note.grid(row=11, column=0, padx=5, pady=5, sticky='EW')
+        self.new_note_btn.grid(row=11, column=0, padx=5, pady=5, sticky='EW')
         # Boton para eliminar una nota
-        del_btn = ttk.Button(
+        self.del_note_btn = ttk.Button(
             self.data_frame,
             text="Eliminar",
             image= self._del,
             compound='left',
             state= del_state
         )
-        del_btn.grid(row=11, column=1, padx=5, pady=5, sticky='EW')
+        self.del_note_btn.grid(row=11, column=1, padx=5, pady=5, sticky='EW')
         # Boton para editar la nota.
-        edit_btn = ttk.Button(
+        self.edit_note_btn = ttk.Button(
             self.data_frame,
             text="Editar",
             image= self._edit_note,
             compound='left',
             state= edit_state
         )
-        edit_btn.grid(row=11, column=2, padx=5, pady=5, sticky='EW')
+        self.edit_note_btn.grid(row=11, column=2, padx=5, pady=5, sticky='EW')
         # Boton para guardar la nota
-        save_btn = ttk.Button(
+        self.save_note_btn = ttk.Button(
             self.data_frame,
             text="Guardar",
             image= self._save_note,
             compound='left',
-            state= save_state
+            state= save_state,
+            command= self._save_new_note
         )
-        save_btn.grid(row=11, column=3, padx=5, pady=5, sticky='EW')
+        self.save_note_btn.grid(row=11, column=3, padx=5, pady=5, sticky='EW')
 
+### Funciones para la carga de las notas en la tabla.
     def _text_note(self, event):
         # obtengo el id de la columna seleccionada.
         linea = self.tabla_notas.identify_row(event.y)
@@ -428,6 +441,44 @@ class MainWindow(Tk):
                     self._head_notas = [info.titulo, info.f_ingreso]
                     self.tabla_notas.insert("", tk.END, values= self._head_notas, text=info.id)
 
+
+### Funciones Botonera de acciones para las notas ###
+    def _create_note(self):
+        # Activación de las casillas para el ingreso de la nota.
+        self.e_note.config(state=tk.NORMAL)
+        self.note_box.config(state= tk.NORMAL)
+        # limpieza de las casillas para el nuevo contenido.
+        self.e_note.delete(0, tk.END)
+        self.e_note.focus()
+        self.note_box.delete('1.0', tk.END)
+        # Cambio de estado de la botonera de interaccion e la nota.
+        self.new_note_btn.config(state= tk.DISABLED)
+        self.save_note_btn.config(state= tk.NORMAL)
+        self.del_note_btn.config(state= tk.NORMAL)
+        self.edit_note_btn.config(state= tk.DISABLED)
+
+    def _save_new_note(self, note = None):
+        if note is None:
+            # Obtención de los datos de la nota.
+            titulo = self.e_note.get()
+            nota = self.note_box.get('1.0', tk.END)
+            cliente = self._clave.get()
+            # Objeto nota
+            nueva_nota = Notas(
+                id_nota= cliente,
+                titulo= titulo,
+                nota= nota
+            )
+            # Ingreso de la nota en la base de datos.
+            try:
+                DaoNotas.regNota(nueva_nota)
+                messagebox.showinfo("Guardado", "Nota Guardada")
+                self._data_client(self._client)
+            except Exception as ex:
+                messagebox.showerror("Error!", f"Ocurrió un problema:\n{ex}")
+
+
+#### Funciones de Botonera principal ###
     def _load_client(self):
         """Encargada de la busqueda de clientes, para obtener su información, crear el objeto cliente y cargar
         su información el widget para su manipulación.
@@ -461,7 +512,9 @@ class MainWindow(Tk):
         pass
 
     def _delete_client(self):
-        pass
+        id_client = self._id.get()
+        DaoClient.delete(id_client)
+        self._clean_data()
 
     def _load_prods(self):
         pass

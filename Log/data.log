@@ -978,3 +978,6 @@
 09:33:18 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
 09:43:52 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
 09:45:32 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+09:59:04 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+09:59:13 WARNING :::dao.py::: [_check_point Line: 205] ->> Sin Notas para cargar
+10:07:02 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar

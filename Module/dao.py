@@ -16,10 +16,10 @@ class DaoClient:
     @classmethod
     def _check_point(cls, result: tuple):
         if result:
-            log.info(f'Registros encontrados: {len(result)}')
+            log.info(f'Cliente(s) encontrado(s).: {len(result)}')
             return result
         else:
-            log.warning(f'No se encontró ningún registro')
+            log.warning(f'Sin Cliente para mostrar')
             return None
 
     # Busqueda de registros.
@@ -199,10 +199,10 @@ class DaoNotas:
     @classmethod
     def _check_point(cls, result: tuple):
         if result:
-            log.info(f'Registros encontrados: {len(result)}')
+            log.info(f'Nota(s) encontrada(s): {len(result)}')
             return result
         else:
-            log.warning(f'No se encontró ningún registro')
+            log.warning(f'Sin Notas para cargar')
             return None
 
     # Busqueda de Nota.
@@ -286,10 +286,10 @@ class DaoProduct:
     @classmethod
     def _check_point(cls, result: tuple):
         if result:
-            log.info(f'Registros encontrados: {len(result)}')
+            log.info(f'Producto(s) encontrado(s): {len(result)}')
             return result
         else:
-            log.warning(f'No se encontró ningún registro')
+            log.warning(f'Sin productos que mostrar')
             return None
 
     # Registro de un producto en la base de datos.

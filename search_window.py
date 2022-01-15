@@ -142,9 +142,9 @@ class SearchWin(Toplevel):
                 mothers=a_materno.strip().title(),
             )
             if not results:
-                messagebox.showinfo(
-                    "Resultados", "No se encontró ninguna coincidencia."
-                )
+                messagebox.showinfo("Resultados", "No se encontró ninguna coincidencia.")
+                # Al cerrar el messagebox llama a la ventana de busqueda al frente.
+                self.attributes("-topmost", True)
             else:
                 # Lectura de resultados y creación del objeto tipo cliente.
                 for data in results:

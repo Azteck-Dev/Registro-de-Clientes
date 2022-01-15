@@ -4,7 +4,7 @@ import os
 file = os.path.abspath("Log/")
 
 log.basicConfig(
-    level=log.INFO,
+    level=log.WARNING,
     format="%(asctime)s %(levelname)s :::%(filename)s::: [%(funcName)s Line: %(lineno)d] ->> %(message)s",
     datefmt="%I:%M:%S",
     handlers=[

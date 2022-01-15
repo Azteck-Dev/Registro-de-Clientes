@@ -463,19 +463,26 @@ class MainWindow(Tk):
             titulo = self.e_note.get()
             nota = self.note_box.get('1.0', tk.END)
             cliente = self._clave.get()
-            # Objeto nota
-            nueva_nota = Notas(
-                id_nota= cliente,
-                titulo= titulo,
-                nota= nota
-            )
-            # Ingreso de la nota en la base de datos.
-            try:
-                DaoNotas.regNota(nueva_nota)
-                messagebox.showinfo("Guardado", "Nota Guardada")
-                self._data_client(self._client)
-            except Exception as ex:
-                messagebox.showerror("Error!", f"Ocurrió un problema:\n{ex}")
+            # Se verifica que se ingreso información.
+            if titulo and nota:
+                # Objeto nota
+                nueva_nota = Notas(
+                    id_nota= cliente,
+                    titulo= titulo.capitalize(),
+                    nota= nota
+                )
+                # limpieza de las casillas
+                self.e_note.delete(0, tk.END)
+                self.note_box.delete('1.0', tk.END)
+                # Ingreso de la nota en la base de datos.
+                try:
+                    DaoNotas.regNota(nueva_nota)
+                    messagebox.showinfo("Guardado", "Nota Guardada")
+                    self._data_client(self._client)
+                except Exception as ex:
+                    messagebox.showerror("Error!", f"Ocurrió un problema:\n{ex}")
+            else:
+                messagebox.showinfo("Nota vaciá", "Nose pueden guardar notas vaciás")
 
 
 #### Funciones de Botonera principal ###

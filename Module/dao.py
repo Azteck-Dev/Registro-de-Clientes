@@ -228,7 +228,7 @@ class DaoNotas:
         """
         cls._data_search = (id_nota,)
         with AccessDB() as cursor:
-            cursor.execute('SELECT * FROM Notas WHERE id_nota = ?', cls._data_search)
+            cursor.execute('SELECT * FROM Notas WHERE id_nota = ? ORDER BY F_nota DESC', cls._data_search)
             cls._result = cursor.fetchall()
             return cls._check_point(cls._result)
 

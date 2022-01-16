@@ -1,5 +1,6 @@
 ### Code by: J.Mesach Venegas
 ### email: mesach.venegas@gmail.com
+from subprocess import call
 from tkinter import PhotoImage, Tk, messagebox, scrolledtext, ttk
 from search_window import SearchWin
 from NewClient_window import NewClient
@@ -27,6 +28,9 @@ class MainWindow(Tk):
         new_note_img = os.path.abspath("Sources/images/add_note_32x32.png")
         edit_note_img = os.path.abspath("SOurces/images/edit_note_32x32.png")
         save_note_img = os.path.abspath("Sources/images/save_file.png")
+        cancel_img = os.path.abspath("Sources/images/cancel_64x64.png")
+        save_client_img = os.path.abspath("Sources/images/save_cliente_64x64.png")
+        load_img = os.path.abspath("Sources/images/load_32x32.png")
         self._new = PhotoImage(file= add_img)
         self._search = PhotoImage(file= search_img)
         self._edit = PhotoImage(file= edit_img)
@@ -38,6 +42,9 @@ class MainWindow(Tk):
         self._add_note = PhotoImage(file= new_note_img)
         self._edit_note = PhotoImage(file= edit_note_img)
         self._save_note = PhotoImage(file= save_note_img)
+        self._cancel_update_client = PhotoImage(file= cancel_img)
+        self._save_update_client = PhotoImage(file= save_client_img)
+        self._load = PhotoImage(file= load_img)
         # Variables.
         self._client = None
         self._head_notas = []
@@ -84,7 +91,7 @@ class MainWindow(Tk):
         btn_frame.grid(row=0, column=0, sticky="NSEW")
         # Botones.
         # Agregar un cliente nuevo.
-        add_btn = tk.Button(
+        self.add_btn = tk.Button(
             btn_frame,
             text="Nuevo Cliente",
             image= self._new,
@@ -94,9 +101,9 @@ class MainWindow(Tk):
             command= NewClient,
             font=('Arial',10,'bold')
         )
-        add_btn.grid(row=0, column=0, padx=5, pady=10, sticky="NSEW")
+        self.add_btn.grid(row=0, column=0, padx=5, pady=10, sticky="NSEW")
         # Buscar un cliente.
-        search_btn = tk.Button(
+        self.search_btn = tk.Button(
             btn_frame,
             text="Buscar Cliente",
             image= self._search,
@@ -106,7 +113,7 @@ class MainWindow(Tk):
             command= self._load_client,
             font=('Arial',10,'bold')
         )
-        search_btn.grid(row=1, column=0, padx=5, pady=10, sticky="NSEW")
+        self.search_btn.grid(row=1, column=0, padx=5, pady=10, sticky="NSEW")
         # Editar un cliente.
         self.edit_btn = tk.Button(
             btn_frame,
@@ -251,14 +258,14 @@ class MainWindow(Tk):
         # Localización del cliente.
         l_local = tk.Label(self.data_frame, text="Localización", font=('arial',10,'bold'), justify='right')
         l_local.grid(row=5, column=0, padx=5, pady=5, sticky="NW")
-        self._e_type = ttk.Entry(
+        self._e_location = ttk.Entry(
             self.data_frame,
             textvariable= self._location,
             font=('arial',10,'bold'),
             state= tk.DISABLED,
             width=15
         )
-        self._e_type.grid(row=5, column=1, padx=2, pady=5, sticky="NW")
+        self._e_location.grid(row=5, column=1, padx=2, pady=5, sticky="NW")
         # Adeudo.
         l_debt = tk.Label(self.data_frame, text="Adeudo", font=('arial',10,'bold'), justify='right')
         l_debt.grid(row=4, column=2, padx=5, pady=5, sticky="NW")
@@ -552,7 +559,65 @@ class MainWindow(Tk):
             self._data_client(self._client)
 
     def _edit_client(self):
-        pass
+        tipos_cliente = ["Comprador","Proveedor"]
+        loca_cliente = ["Local","Nacional","Internacional"]
+        # Desactivacíon de botones de interaccion innecesarios.
+        self.add_btn.config(state= tk.DISABLED)
+        self.search_btn.config(state = tk.DISABLED)
+        self.delete_btn.config(state= tk.DISABLED)
+        # Cambio de estado de botones necesarios.
+        self.edit_btn.config(image= self._save_update_client,text="Guardar cambios")
+        self.clean_btn.config(image= self._cancel_update_client, text="Cancelar cambios", command= self._not_update)
+        # Activación de casillas de Info del cliente para su edición.
+        self._e_name.config(state= tk.ACTIVE)
+        self._e_name.focus()
+        self._e_lastname.config(state = tk.NORMAL)
+        self._e_mothers.config(state = tk.NORMAL)
+        self._e_phone.config(state = tk.NORMAL)
+        self._e_debt.config(state = tk.NORMAL)
+        self._e_balance.config(state = tk.NORMAL)
+        self._box_type = ttk.Combobox(
+            self.data_frame,
+            width=15,
+            values= tipos_cliente
+        )
+        self._box_type.grid(row=4, column=1, padx=2, pady=5, sticky="NW")
+        self._box_location = ttk.Combobox(
+            self.data_frame,
+            width= 15,
+            values= loca_cliente
+        )
+        self._box_location.grid(row=5, column=1, padx=2, pady=5, sticky="NW")
+        index_client = tipos_cliente.index(self._client.type_client)
+        self._box_type.current(index_client)
+        index_location = loca_cliente.index(self._client.location)
+        self._box_location.current(index_location)
+        # Boton para carga de nueva imagen de cliente.
+        self._change_img_btn = ttk.Button(
+            self.data_frame,
+            text="Cargar Imagen",
+            image= self._load,
+            compound= tk.LEFT
+        )
+        self._change_img_btn.grid(row=3, column=0, padx=5, pady=5, sticky="NSEW")
+
+    def _not_update(self):
+        # recarga de widgets de botones e info del cliente.
+        self._side_buttons()
+        self._e_name.config(state= tk.DISABLED)
+        self._e_lastname.config(state = tk.DISABLED)
+        self._e_mothers.config(state = tk.DISABLED)
+        self._e_phone.config(state = tk.DISABLED)
+        self._e_debt.config(state = tk.DISABLED)
+        self._e_balance.config(state = tk.DISABLED)
+        # Eliminación de elementos innecesarios.
+        self._box_location.destroy()
+        self._box_type.destroy()
+        self._change_img_btn.destroy()
+        # Reactivación de botones de interacion.
+        self.edit_btn.config(state= tk.NORMAL)
+        self.clean_btn.config(state= tk.NORMAL)
+        self.delete_btn.config(state= tk.NORMAL)
 
     def _delete_client(self):
         id_client = self._id.get()
@@ -576,8 +641,6 @@ class MainWindow(Tk):
         self.edit_btn.config(state='disabled')
         self.delete_btn.config(state='disabled')
         self.clean_btn.config(state='disabled')
-        self.prods_btn.config(state='disabled')
-
 
 
 if __name__ == '__main__':

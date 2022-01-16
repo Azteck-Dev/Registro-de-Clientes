@@ -154,11 +154,13 @@ class DaoClient:
             data.type_client,
             data.location,
             data.image,
+            data.debt,
+            data.balance,
             data.id
         )
         try:
             with AccessDB() as cursor:
-                cursor.execute("UPDATE Clientes SET Nombres= ?, A_paterno= ?, A_materno= ?, Telefono= ?, T_cliente= ?, L_cliente= ?, C_img= ? WHERE ID = ?",cls._data_in)
+                cursor.execute("UPDATE Clientes SET Nombres= ?, A_paterno= ?, A_materno= ?, Telefono= ?, T_cliente= ?, L_cliente= ?, C_img= ?, M_deuda = ?,M_favor = ? WHERE ID = ?",cls._data_in)
                 log.info(f'Cliente: {data.clave} actualizado')
                 return True
         except Exception:

@@ -145,6 +145,7 @@ class SearchWin(Toplevel):
                 messagebox.showinfo("Resultados", "No se encontró ninguna coincidencia.")
                 # Al cerrar el messagebox llama a la ventana de busqueda al frente.
                 self.attributes("-topmost", True)
+                self.e_name.focus()
             else:
                 # Lectura de resultados y creación del objeto tipo cliente.
                 for data in results:

@@ -36,6 +36,9 @@ class Notas:
     @property
     def f_ingreso(self):
         return self._f_ingreso
+    @f_ingreso.setter
+    def f_ingreso(self, value):
+        self._f_ingreso = value
 
     def _notaIn(self, f_ingreso):
         dat = datetime.now()

@@ -1,10 +1,12 @@
+### Code by: J.Mesach Venegas
+### email: mesach.venegas@gmail.com
 from tkinter import PhotoImage, Tk, messagebox, scrolledtext, ttk
 from search_window import SearchWin
 from NewClient_window import NewClient
 from Module.client import Client
 from Module.notas import Notas
 from Module.dao import DaoClient, DaoNotas, DaoProduct
-from Module.log_gen import log
+from datetime import datetime
 import tkinter as tk
 import os
 
@@ -18,7 +20,7 @@ class MainWindow(Tk):
         search_img = os.path.abspath('Sources/images/search_client_64x64.png')
         edit_img = os.path.abspath('Sources/images/edit_client.png')
         del_img = os.path.abspath("Sources/images/delete_client.png")
-        prod_img = os.path.abspath("Sources/images/prods_64x64.png")
+        exit_img = os.path.abspath("Sources/images/exit_64x64.png")
         clear_img = os.path.abspath("Sources/images/clear_btn.png")
         see_img = os.path.abspath("Sources/images/ver_32x32.png")
         del_note_img = os.path.abspath("Sources/images/delete_32x32.png")
@@ -29,7 +31,7 @@ class MainWindow(Tk):
         self._search = PhotoImage(file= search_img)
         self._edit = PhotoImage(file= edit_img)
         self._delete = PhotoImage(file= del_img)
-        self._prod = PhotoImage(file= prod_img)
+        self._exit = PhotoImage(file= exit_img)
         self._clean = PhotoImage(file= clear_img)
         self._see = PhotoImage(file= see_img)
         self._del = PhotoImage(file= del_note_img)
@@ -41,6 +43,7 @@ class MainWindow(Tk):
         self._head_notas = []
         self._cont_note = []
         self._content = None
+        self._obj_note = None
         self._id = tk.StringVar(value= None)
         self._name = tk.StringVar(value= None)
         self._clave = tk.StringVar(value= None)
@@ -141,17 +144,16 @@ class MainWindow(Tk):
         )
         self.clean_btn.grid(row=4, column=0, padx=5, pady=10, sticky="NSEW")
         # Cargar productos del cliente.
-        self.prods_btn = tk.Button(
+        self.exit_btn = tk.Button(
             btn_frame,
-            text="Productos",
-            image= self._prod,
+            text="Salir",
+            image= self._exit,
             compound='top',
             border=0,
             font=('Arial',10,'bold'),
-            command= self._load_prods,
-            state= tk.DISABLED
+            command= lambda: (self.quit, self.destroy()),
         )
-        self.prods_btn.grid(row=5, column=0, padx=5, pady=10, sticky="NSEW")
+        self.exit_btn.grid(row=5, column=0, padx=5, pady=10, sticky="NSEW")
 
     def _data_client(self, cliente: Client = None):
         """Encargada de crear el frame donde se visualizaran los datos del cliente.
@@ -373,7 +375,8 @@ class MainWindow(Tk):
             text="Eliminar",
             image= self._del,
             compound='left',
-            state= del_state
+            state= del_state,
+            command= self._delete_note
         )
         self.del_note_btn.grid(row=11, column=1, padx=5, pady=5, sticky='EW')
         # Boton para editar la nota.
@@ -382,7 +385,8 @@ class MainWindow(Tk):
             text="Editar",
             image= self._edit_note,
             compound='left',
-            state= edit_state
+            state= edit_state,
+            command= self._fun_edit_note
         )
         self.edit_note_btn.grid(row=11, column=2, padx=5, pady=5, sticky='EW')
         # Boton para guardar la nota
@@ -402,16 +406,19 @@ class MainWindow(Tk):
         linea = self.tabla_notas.identify_row(event.y)
         elemento = self.tabla_notas.item(linea)
         id_nota = elemento['text']
+        # Obtengo los datos de la nota
         data = DaoNotas.getNote(id_nota)
         if data:
-            nota = Notas(
+            # Objeto nota
+            self._obj_note = Notas(
                 id= data[0],
                 id_nota= data[1],
                 f_ingreso= data[2],
                 titulo= data[3],
                 nota= data[4]
             )
-            self._widget_notes(note=nota, flag=True)
+            # Se carga la nota
+            self._widget_notes(note=self._obj_note, flag=True)
         else:
             return False
 
@@ -457,12 +464,12 @@ class MainWindow(Tk):
         self.del_note_btn.config(state= tk.NORMAL)
         self.edit_note_btn.config(state= tk.DISABLED)
 
-    def _save_new_note(self, note = None):
-        if note is None:
-            # Obtención de los datos de la nota.
-            titulo = self.e_note.get()
-            nota = self.note_box.get('1.0', tk.END)
-            cliente = self._clave.get()
+    def _save_new_note(self, new = True):
+        # Obtención de los datos de la nota.
+        titulo = self.e_note.get()
+        nota = self.note_box.get('1.0', tk.END)
+        cliente = self._clave.get()
+        if new:
             # Se verifica que se ingreso información.
             if titulo and nota:
                 # Objeto nota
@@ -483,7 +490,37 @@ class MainWindow(Tk):
                     messagebox.showerror("Error!", f"Ocurrió un problema:\n{ex}")
             else:
                 messagebox.showinfo("Nota vaciá", "Nose pueden guardar notas vaciás")
+        else:
+            fecha = datetime.now()
+            update_date = fecha.strftime("%d-%m-%Y")
+            try:
+                self._obj_note.titulo = self.e_note.get()
+                self._obj_note.nota = self.note_box.get('1.0', tk.END)
+                self._obj_note.f_ingreso = update_date
+                DaoNotas.noteUpdate(self._obj_note)
+                self._data_client(self._client)
+            except Exception as ex:
+                messagebox.showerror(self.e_note.get(),f"error:\n{ex}")
 
+    def _delete_note(self):
+        try:
+            DaoNotas.delNote(self._obj_note.id)
+            self._data_client(self._client)
+        except Exception as ex:
+            messagebox.showerror("Error",f"No se pudo borrar la nota:\n{ex}")
+
+    def _fun_edit_note(self):
+        try:
+            # Reactiva las casillas para su edición.
+            self.e_note.config(state= tk.ACTIVE)
+            self.note_box.config(state= tk.NORMAL)
+            # Deshabilita botones u habilitación
+            self.new_note_btn.config(state= tk.DISABLED)
+            self.del_note_btn.config(state= tk.DISABLED)
+            self.edit_note_btn.config(state= tk.DISABLED)
+            self.save_note_btn.config(state= tk.NORMAL, command= lambda: self._save_new_note(False))
+        except Exception as ex:
+            messagebox.showinfo("Error",f"{ex}")
 
 #### Funciones de Botonera principal ###
     def _load_client(self):
@@ -512,7 +549,6 @@ class MainWindow(Tk):
             self.edit_btn.config(state='active')
             self.delete_btn.config(state='active')
             self.clean_btn.config(state='active')
-            self.prods_btn.config(state='active')
             self._data_client(self._client)
 
     def _edit_client(self):
@@ -522,10 +558,6 @@ class MainWindow(Tk):
         id_client = self._id.get()
         DaoClient.delete(id_client)
         self._clean_data()
-
-    def _load_prods(self):
-        pass
-
 
     def _clean_data(self):
         """Encargada de la limpieza de los datos en las variables y recargar el widget.

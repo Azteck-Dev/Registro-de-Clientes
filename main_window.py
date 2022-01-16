@@ -1,6 +1,8 @@
 ### Code by: J.Mesach Venegas
 ### email: mesach.venegas@gmail.com
-from tkinter import PhotoImage, TclError, Tk, dialog, messagebox, scrolledtext, ttk, filedialog
+from this import d
+from tkinter import PhotoImage, TclError, Tk, messagebox, scrolledtext, ttk, filedialog
+from Module.productos import Producto
 from search_window import SearchWin
 from NewClient_window import NewClient
 from Module.client import Client
@@ -30,6 +32,7 @@ class MainWindow(Tk):
         cancel_img = os.path.abspath("Sources/images/cancel_64x64.png")
         save_client_img = os.path.abspath("Sources/images/save_cliente_64x64.png")
         load_img = os.path.abspath("Sources/images/load_32x32.png")
+        search_prod = os.path.abspath("Sources/images/search_client_32x32.png")
         self._new = PhotoImage(file= add_img)
         self._search = PhotoImage(file= search_img)
         self._edit = PhotoImage(file= edit_img)
@@ -44,8 +47,10 @@ class MainWindow(Tk):
         self._cancel_update_client = PhotoImage(file= cancel_img)
         self._save_update_client = PhotoImage(file= save_client_img)
         self._load = PhotoImage(file= load_img)
+        self._search_prod = PhotoImage(file= search_prod)
         # Variables.
         self._client = None
+        self._product = None
         self._head_notas = []
         self._cont_note = []
         self._content = None
@@ -78,10 +83,13 @@ class MainWindow(Tk):
         self.wm_minsize(width, height)
         # Propiedades del grid.
         self.rowconfigure(0, weight=1)
+        self.columnconfigure(2, weight=1)
         self._side_buttons()
         self._data_client()
+        self._tab_frame()
         self.mainloop()
 
+    # Frame Con la botonera de interaccion principal
     def _side_buttons(self):
         """Frame donde se carga la botonera de interacion principal.
         """
@@ -161,6 +169,7 @@ class MainWindow(Tk):
         )
         self.exit_btn.grid(row=5, column=0, padx=5, pady=10, sticky="NSEW")
 
+    # Frame donde se carga la información del cliente.
     def _data_client(self, cliente: Client = None):
         """Encargada de crear el frame donde se visualizaran los datos del cliente.
 
@@ -315,6 +324,7 @@ class MainWindow(Tk):
         # Funcion encargada de mostrar las notas del cliente.
         self._widget_notes(flag=flag)
 
+    # Widget donde se carga la nota para su visualización y manipulación.
     def _widget_notes(self, flag: bool, note: Notas = None):
         """Encargada de generar la vista para las notas del cliente cada que se recarga el widget."""
         if note:
@@ -405,6 +415,90 @@ class MainWindow(Tk):
             command= self._save_new_note
         )
         self.save_note_btn.grid(row=11, column=3, padx=5, pady=5, sticky='EW')
+
+    # Frame para la visualización de los productos del cliente.
+    def _tab_frame(self, cliente: Client = None):
+        self.prod_frame = tk.LabelFrame(self, text="Productos")
+        self.prod_frame.grid(row=0, column=2, padx=5, pady=5, sticky='NSEW')
+        type_search = ["Seleccionar","Cliente","Producto"]
+        # Busqueda
+        l_search_type = tk.Label(self.prod_frame, text="Buscar por", font=("arial",10,'bold'))
+        l_search_type.grid(row=0, column=0, padx=5, pady=5, sticky='SE')
+        self.e_type_box = ttk.Combobox(self.prod_frame, values=type_search, width=10)
+        self.e_type_box.grid(row=0, column=1, padx=5, pady=5, sticky="SW")
+        self.e_type_box.current(0)
+        l_text_search = tk.Label(self.prod_frame, text="Cliente/Producto", font=("arial",10,'bold'))
+        l_text_search.grid(row=1, column=0, padx=5, pady=5, sticky='SE')
+        self.e_text_search = ttk.Entry(self.prod_frame, width=30, justify='left')
+        self.e_text_search.grid(row=1, column=1,padx=5, pady=5, sticky="SW")
+        # Boton para la busqueda.
+        self.product_search_btn = ttk.Button(
+            self.prod_frame,
+            text="Buscar",
+            image= self._search_prod,
+            compound='left'
+        )
+        self.product_search_btn.grid(row=1, column=2, padx=5, pady=5, sticky='NEW')
+        # Tabla de productos.
+        self.tabla_productos = ttk.Treeview(
+            self.prod_frame,
+            columns=("folio","name","cost","qty","in","out"),
+            show='headings',
+            height=10
+        )
+        self.tabla_productos.grid(row=2, column=0, padx=5, pady=5, sticky="NSEW",columnspan=3)
+        # Columnas de la tabla.
+        self.tabla_productos.heading("folio", text="Folio")
+        self.tabla_productos.heading("name", text="Nombre")
+        self.tabla_productos.heading("cost", text="Precio")
+        self.tabla_productos.heading("qty",text="Cantidad")
+        self.tabla_productos.heading("in", text="Ingreso")
+        self.tabla_productos.heading("out",text="Salio")
+        # Dimensiones de las columnas
+        self.tabla_productos.column("folio", width=75, anchor= tk.CENTER)
+        self.tabla_productos.column("name",width=150, anchor= tk.CENTER)
+        self.tabla_productos.column("cost",width=80, anchor= tk.CENTER)
+        self.tabla_productos.column("qty",width=80, anchor= tk.CENTER)
+        self.tabla_productos.column("in",width=100, anchor= tk.CENTER)
+        self.tabla_productos.column("out",width=100, anchor= tk.CENTER)
+        # Scrollbar para la info de las notas
+        scrollbar = ttk.Scrollbar(self.prod_frame, orient=tk.VERTICAL, command=self.tabla_productos.yview)
+        self.tabla_productos.configure(yscrollcommand=scrollbar.set)
+        scrollbar.grid(row=2, column=3, sticky="NS")
+        # Carga de productos en la tabla
+        if cliente:
+            self._load_products(cliente.clave)
+
+
+### Funciones para la tabla de productos.
+    def _load_products(self, key = None):
+        if key:
+            try:
+                resultados = DaoProduct.search(search="client", id= key)
+                if resultados:
+                    for dat in resultados:
+                        self._product = Producto(
+                            id= dat[0],
+                            prod_id= dat[1],
+                            folio= dat[2],
+                            name= dat[3],
+                            description= dat[4],
+                            cantidad= dat[5],
+                            cost= dat[6],
+                            f_in= dat[7],
+                            f_out= dat[8]
+                        )
+                    prod_info = [
+                        self._product.folio,
+                        self._product.name,
+                        self._product.cost,
+                        self._product.cantidad,
+                        self._product.f_in,
+                        self._product.f_out
+                    ]
+                    self.tabla_productos.insert("", tk.END, values= prod_info, text= self._product.prod_id)
+            except Exception as ex:
+                messagebox.showerror("Error", ex)
 
 ### Funciones para la carga de las notas en la tabla.
     def _text_note(self, event):
@@ -556,6 +650,7 @@ class MainWindow(Tk):
             self.delete_btn.config(state='active')
             self.clean_btn.config(state='active')
             self._data_client(self._client)
+            self._tab_frame(self._client)
 
     def _edit_client(self):
         tipos_cliente = ["Comprador","Proveedor"]
@@ -659,6 +754,7 @@ class MainWindow(Tk):
         self._location = tk.StringVar(value= None)
         self._date = tk.StringVar(value= None)
         self._data_client()
+        self._tab_frame()
         self.edit_btn.config(state='disabled')
         self.delete_btn.config(state='disabled')
         self.clean_btn.config(state='disabled')

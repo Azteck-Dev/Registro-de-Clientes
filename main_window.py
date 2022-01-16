@@ -1,7 +1,6 @@
 ### Code by: J.Mesach Venegas
 ### email: mesach.venegas@gmail.com
-from subprocess import call
-from tkinter import PhotoImage, Tk, messagebox, scrolledtext, ttk
+from tkinter import PhotoImage, TclError, Tk, dialog, messagebox, scrolledtext, ttk, filedialog
 from search_window import SearchWin
 from NewClient_window import NewClient
 from Module.client import Client
@@ -190,15 +189,15 @@ class MainWindow(Tk):
             self._type = tk.StringVar(value= cliente.type_client)
             self._location = tk.StringVar(value= cliente.location)
             # Logo o imagen del cliente.
-            logo = tk.Label(self.data_frame, image= self._logo, compound='center' ,bg="#fff")
-            logo.config(height=120, width=120)
-            logo.grid(row=0, column=0, padx=5, pady=10, rowspan=3)
+            self.logo = tk.Label(self.data_frame, image= self._logo, compound='center' ,bg="#fff")
+            self.logo.config(height=120, width=120)
+            self.logo.grid(row=0, column=0, padx=5, pady=10, rowspan=3)
         else:
             flag = False
             # Logo o imagen del cliente.
-            logo = tk.Label(self.data_frame, text="Not Aviable",bg="#fff")
-            logo.config(height=6, width=16)
-            logo.grid(row=0, column=0, padx=5, pady=10, rowspan=3)
+            self.logo = tk.Label(self.data_frame, text="Not Aviable",bg="#fff")
+            self.logo.config(height=6, width=16)
+            self.logo.grid(row=0, column=0, padx=5, pady=10, rowspan=3)
 
         # Datos personales del cliente.
         # Nombre(s).
@@ -566,7 +565,7 @@ class MainWindow(Tk):
         self.search_btn.config(state = tk.DISABLED)
         self.delete_btn.config(state= tk.DISABLED)
         # Cambio de estado de botones necesarios.
-        self.edit_btn.config(image= self._save_update_client,text="Guardar cambios")
+        self.edit_btn.config(image= self._save_update_client,text="Guardar cambios", command= self._save_changes)
         self.clean_btn.config(image= self._cancel_update_client, text="Cancelar cambios", command= self._not_update)
         # Activación de casillas de Info del cliente para su edición.
         self._e_name.config(state= tk.ACTIVE)
@@ -597,9 +596,29 @@ class MainWindow(Tk):
             self.data_frame,
             text="Cargar Imagen",
             image= self._load,
-            compound= tk.LEFT
+            compound= tk.LEFT,
+            command= self._load_imagen
         )
         self._change_img_btn.grid(row=3, column=0, padx=5, pady=5, sticky="NSEW")
+
+    def _save_changes(self):
+        self._client.name=  self._e_name.get()
+        self._client.lastname = self._e_lastname.get()
+        self._client.mothers = self._e_mothers.get()
+        self._client.phone = self._e_phone.get()
+        self._client.debt = self._e_debt.get()
+        self._client.balance = self._e_balance.get()
+        self._client.type_client = self._box_type.get()
+        self._client.location = self._box_location.get()
+        try:
+            DaoClient.update(self._client)
+            self._data_client(self._client)
+            self._side_buttons()
+            self.edit_btn.config(state= tk.NORMAL)
+            self.clean_btn.config(state= tk.NORMAL)
+            self.delete_btn.config(state= tk.NORMAL)
+        except Exception as ex:
+            messagebox.showerror("Error!", f"No se pudo actualizar:\n{ex}")
 
     def _not_update(self):
         # recarga de widgets de botones e info del cliente.
@@ -618,6 +637,8 @@ class MainWindow(Tk):
         self.edit_btn.config(state= tk.NORMAL)
         self.clean_btn.config(state= tk.NORMAL)
         self.delete_btn.config(state= tk.NORMAL)
+        # restablecimiento de la imagen.
+        self.logo.config(image= self._logo)
 
     def _delete_client(self):
         id_client = self._id.get()
@@ -642,6 +663,20 @@ class MainWindow(Tk):
         self.delete_btn.config(state='disabled')
         self.clean_btn.config(state='disabled')
 
+    def _load_imagen(self):
+        try:
+            main_dir = os.path.abspath("Sources/clients")
+            img_path = filedialog.askopenfilename(
+                initialdir=main_dir,
+                title="Cartera - Subir Imagen",
+                filetypes= (("","*.png"),("all","*"))
+            )
+            if img_path:
+                self._client.image = os.path.abspath(img_path)
+                self.new_img = PhotoImage(file= self._client.image)
+                self.logo.config(image= self.new_img)
+        except TclError:
+            messagebox.showerror("Error",f"Solo se permiten archivos en formato png\nno mayores 200x150 pixels")
 
 if __name__ == '__main__':
     test = MainWindow()

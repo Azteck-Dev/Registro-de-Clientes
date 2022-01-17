@@ -14,7 +14,7 @@ control de ingresos de los productos.
 4. SQLite
 
 ## App en ejecución
----
+
 > Ingresar un nuevo cliente.
 ![New Client](Example/new_client_win.png "Agregar Cliente")
 > Busqueda de clientes.

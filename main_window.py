@@ -1,7 +1,8 @@
 # Code by: J.Mesach Venegas
 # email: mesach.venegas@gmail.com
-from math import prod
-from tkinter import PhotoImage, TclError, Tk, messagebox, scrolledtext, ttk, filedialog
+from calendar import c
+from cgitb import text
+from tkinter import PhotoImage, TclError, Tk, font, messagebox, scrolledtext, ttk, filedialog
 from Module.productos import Producto
 from search_window import SearchWin
 from NewClient_window import NewClient
@@ -34,6 +35,10 @@ class MainWindow(Tk):
         save_client_img = os.path.abspath("Sources/images/save_cliente_64x64.png")
         load_img = os.path.abspath("Sources/images/load_32x32.png")
         search_prod = os.path.abspath("Sources/images/search_client_32x32.png")
+        new_prod = os.path.abspath("Sources/images/new_prod_32x32.png")
+        delete_prod = os.path.abspath("Sources/images/delete_prod_32x32.png")
+        update_prod = os.path.abspath("Sources/images/update_prod_32x32.png")
+        save_prod = os.path.abspath("Sources/images/save_prod_32x32.png")
         self._new = PhotoImage(file= add_img)
         self._search = PhotoImage(file= search_img)
         self._edit = PhotoImage(file= edit_img)
@@ -49,6 +54,10 @@ class MainWindow(Tk):
         self._save_update_client = PhotoImage(file= save_client_img)
         self._load = PhotoImage(file= load_img)
         self._search_prod = PhotoImage(file= search_prod)
+        self._new_prod = PhotoImage(file= new_prod)
+        self._delete_prod = PhotoImage(file= delete_prod)
+        self._update_prod = PhotoImage(file= update_prod)
+        self._save_prod = PhotoImage(file= save_prod)
         # Variables.
         self._client = None
         self._products = None
@@ -485,6 +494,10 @@ class MainWindow(Tk):
 
     # Frame donde se desglosan los datos del producto.
     def _prod_info(self, producto:Producto = None):
+        # Frame contendor de la información.
+        detail_frame = tk.Frame(self.prod_frame)
+        detail_frame.grid(row=4, column=0, padx=5, pady=5, sticky="NSEW", columnspan=4)
+        # Cambio de valores de las variables si se ha seleccionado un producto.
         if producto:
             self._product_name = tk.StringVar(value= producto.name)
             self._product_key = tk.StringVar(value= producto.id)
@@ -497,12 +510,11 @@ class MainWindow(Tk):
             self._product_out = tk.StringVar(value= producto.f_out)
             index_currency = self.t_currency.index(producto.currency)
             index_size = self.t_size.index(producto.size)
-        # Valores de las combo box
+            self._crud_product(producto)
+        else:
+            self._crud_product()
         self.t_currency = ["None", "dlls", "mxn"]
         self.t_size = ["None","kgs","pzs","lts"]
-        # Frame contendor de la información.
-        detail_frame = tk.Frame(self.prod_frame)
-        detail_frame.grid(row=4, column=0, padx=5, pady=5, sticky="NSEW", columnspan=4)
         # Folio del producto.
         l_folio = tk.Label(detail_frame, text="Folio", justify=tk.RIGHT, font= self.font_style)
         l_folio.grid(row=0, column=0, padx=5, pady=10, sticky='NE')
@@ -611,6 +623,59 @@ class MainWindow(Tk):
             self.box_description.config(state= tk.NORMAL)
             self.box_description.insert('1.0',producto.description)
             self.box_description.config(state= tk.DISABLED)
+
+    # Botones de interacion CRUD de los productos.
+    def _crud_product(self, producto: Producto = None):
+        # Frame para los botones
+        self.frame_crud = ttk.Frame(self.prod_frame)
+        self.frame_crud.grid(row=5, column=0, padx=5, pady=5, columnspan=4, sticky="EW")
+        # Estado de los botones según si hay producto o no.
+        if producto:
+            state_new_btn = tk.NORMAL
+            state_delete_btn = tk.NORMAL
+            state_change_btn = tk.NORMAL
+            state_save_btn = tk.DISABLED
+        else:
+            state_new_btn = tk.DISABLED
+            state_delete_btn = tk.DISABLED
+            state_change_btn = tk.DISABLED
+            state_save_btn = tk.DISABLED
+        # Boton de nuevo producto.
+        self.btn_new_product = ttk.Button(
+            self.frame_crud,
+            text="Nuevo",
+            state= state_new_btn,
+            image= self._new_prod,
+            compound='left',
+        )
+        self.btn_new_product.grid(row=0, column=0, padx=7, pady=7, sticky="EW")
+        # Boton de eliminar producto.
+        self.btn_delete_product = ttk.Button(
+            self.frame_crud,
+            text="Eliminar",
+            state= state_delete_btn,
+            image= self._delete_prod,
+            compound='left'
+        )
+        self.btn_delete_product.grid(row=0, column=1, padx=7, pady=7, sticky="EW")
+        # Boton de edición de producto.
+        self.btn_edit_product = ttk.Button(
+            self.frame_crud,
+            text="Actualizar",
+            state= state_change_btn,
+            image= self._update_prod,
+            compound= 'left'
+        )
+        self.btn_edit_product.grid(row=0, column=3, padx=7, pady=7, sticky="EW")
+        # Boton de gardado de cambios.
+        self.btn_save_changes_prod = ttk.Button(
+            self.frame_crud,
+            text="Guardar",
+            state= state_save_btn,
+            image= self._save_prod,
+            compound='left'
+        )
+        self.btn_save_changes_prod.grid(row=0, column=4, padx=7, pady=7, sticky="EW")
 
 ### Funciones para la tabla de productos.
     def _load_products(self, key = None):
@@ -909,7 +974,7 @@ class MainWindow(Tk):
         self._clean_data()
 
     def _clean_data(self):
-        """Encargada de la limpieza de los datos en las variables y recargar el widget.
+        """Encargada de la limpieza de los datos en las variables y recargar los widgets.
         """
         self._name = tk.StringVar(value= None)
         self._clave = tk.StringVar(value= None)

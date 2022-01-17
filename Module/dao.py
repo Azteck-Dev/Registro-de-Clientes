@@ -317,7 +317,7 @@ class DaoProduct:
 
     # Busqueda de productos.
     @classmethod
-    def search(cls, search:str = 'product', id: str = None):
+    def search(cls, search:str = 'product', id: str = None, folio:int = None, name:str = None):
         """Busqueda de productos en la base de datos.
 
         Args:
@@ -328,10 +328,10 @@ class DaoProduct:
             (Tuple): Tupla de tuplas con los resultados obtenidos.
         """
         # Busqueda por producto
-        if search == 'product' and id:
-            cls._products = (id,)
+        if search == 'product' and name or folio:
+            cls._products = (id, folio)
             with AccessDB() as cursor:
-                cursor.execute("SELECT * FROM Productos WHERE nombre = ?", cls._products)
+                cursor.execute("SELECT * FROM Productos WHERE nombre = ? OR folio = ?", cls._products)
                 cls._result = cursor.fetchall()
                 return cls._check_point(cls._result)
         # Busqueda por cliente.

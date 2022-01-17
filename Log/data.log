@@ -1016,3 +1016,16 @@
 06:04:14 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
 06:04:26 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
 07:27:35 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+08:00:48 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
+08:00:48 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+08:00:56 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
+08:06:17 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
+08:11:51 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
+08:27:34 WARNING :::connexion.py::: [__exit__ Line: 43] ->> Ocurrió un error se genero un Rollback
+08:27:34 ERROR :::connexion.py::: [__exit__ Line: 44] ->> Error binding parameter 0 - probably unsupported type.
+<class 'sqlite3.InterfaceError'>
+08:28:48 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+08:28:50 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+08:28:52 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+08:29:40 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+08:29:40 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar

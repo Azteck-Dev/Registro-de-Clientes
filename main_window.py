@@ -1,7 +1,7 @@
 ### Code by: J.Mesach Venegas
 ### email: mesach.venegas@gmail.com
-from this import d
-from tkinter import PhotoImage, TclError, Tk, messagebox, scrolledtext, ttk, filedialog
+from tkinter import PhotoImage, TclError, Tk, font, messagebox, scrolledtext, ttk, filedialog
+from turtle import width
 from Module.productos import Producto
 from search_window import SearchWin
 from NewClient_window import NewClient
@@ -17,6 +17,7 @@ class MainWindow(Tk):
     def __init__(self):
         super().__init__()
         # Recursos de la ventana.
+        self.font_style = "arial",10,'bold'
         icon = os.path.abspath('Sources/icons/agenda_2.ico')
         add_img = os.path.abspath('Sources/images/add_client.png')
         search_img = os.path.abspath('Sources/images/search_client_64x64.png')
@@ -61,13 +62,21 @@ class MainWindow(Tk):
         self._lastname = tk.StringVar(value= None)
         self._mothers = tk.StringVar(value= None)
         self._phone = tk.StringVar(value= None)
-        self._debt = tk.DoubleVar(value= 0)
-        self._balance = tk.DoubleVar(value= 0)
+        self._debt = tk.DoubleVar(value= None)
+        self._balance = tk.DoubleVar(value= None)
         self._type = tk.StringVar(value= None)
         self._location = tk.StringVar(value= None)
         self._date = tk.StringVar(value= None)
         self._title = tk.StringVar(value= None)
         self._note_content = tk.StringVar(value= None)
+        self._product_name = tk.StringVar(value= None)
+        self._product_folio = tk.IntVar(value= None)
+        self._product_key = tk.StringVar(value= None)
+        self._product_description = tk.StringVar(value= None)
+        self._product_price = tk.DoubleVar(value= None)
+        self._product_in = tk.StringVar(value= None)
+        self._product_out = tk.StringVar(value= None)
+        self._product_lote = tk.StringVar(value= None)
         # Dimensiones de la ventana.
         width = 900
         height = 540
@@ -456,7 +465,7 @@ class MainWindow(Tk):
         self.tabla_productos.heading("out",text="Salio")
         # Dimensiones de las columnas
         self.tabla_productos.column("folio", width=75, anchor= tk.CENTER)
-        self.tabla_productos.column("name",width=150, anchor= tk.CENTER)
+        self.tabla_productos.column("name",width=130, anchor= tk.CENTER)
         self.tabla_productos.column("cost",width=80, anchor= tk.CENTER)
         self.tabla_productos.column("qty",width=80, anchor= tk.CENTER)
         self.tabla_productos.column("in",width=100, anchor= tk.CENTER)
@@ -468,7 +477,113 @@ class MainWindow(Tk):
         # Carga de productos en la tabla
         if cliente:
             self._load_products(cliente.clave)
+        # Información detallada del producto.
+        self._prod_info()
 
+    def _prod_info(self, producto:Producto = None):
+        self.t_currency = ["None", "dlls", "mxn"]
+        self.t_size = ["None","kgs","pzs","lts"]
+        detail_frame = tk.Frame(self.prod_frame)
+        detail_frame.grid(row=4, column=0, padx=5, pady=5, sticky="NSEW", columnspan=4)
+        # Folio del producto.
+        l_folio = tk.Label(detail_frame, text="Folio", justify=tk.RIGHT, font= self.font_style)
+        l_folio.grid(row=0, column=0, padx=5, pady=10, sticky='NE')
+        self.e_prod_folio = ttk.Entry(
+            detail_frame,
+            textvariable= self._product_folio,
+            width=10,
+            justify=tk.LEFT,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.e_prod_folio.grid(row=0, column=1, padx=5, pady=10, sticky="NW")
+        # Lote del producto
+        l_lote = tk.Label(detail_frame, text="Lote", font= self.font_style)
+        l_lote.grid(row=0, column=2, padx=5, pady=10, sticky='NW')
+        self.e_prod_lote = ttk.Entry(
+            detail_frame,
+            textvariable= self._product_lote,
+            width=15,
+            justify=tk.LEFT,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.e_prod_lote.grid(row=0, column=3, padx=5, pady=10, sticky="NW")
+        # Clave de cliente.
+        l_clave = tk.Label(detail_frame, text="Cod. Cliente", font= self.font_style)
+        l_clave.grid(row=0, column=4, padx=5, pady=10, sticky='NW')
+        self.e_prod_clave = ttk.Entry(
+            detail_frame,
+            textvariable= self._product_key,
+            width=20,
+            justify=tk.LEFT,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.e_prod_clave.grid(row=0, column=5, padx=5, pady=10, sticky="NW")
+        # Nombre del producto
+        l_name = tk.Label(detail_frame, text="Nombre", font= self.font_style)
+        l_name.grid(row=1, column=0, padx=5, pady=5, sticky="SE")
+        self.e_prod_name = ttk.Entry(
+            detail_frame,
+            textvariable= self._product_name,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.e_prod_name.grid(row=1, column=1, padx=5, pady=5, sticky="SW", columnspan=2)
+        # Costo del producto.
+        l_cost = tk.Label(detail_frame, text="Precio", font= self.font_style)
+        l_cost.grid(row=2, column=0, padx=5, pady=5, sticky="SW")
+        self.e_prod_cost = ttk.Entry(
+            detail_frame,
+            width=10,
+            textvariable= self._product_price,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.e_prod_cost.grid(row=2, column=1, padx=5, pady=5, sticky="SW")
+        # Tipo de moneda.
+        self.box_currency = ttk.Combobox(
+            detail_frame,
+            values= self.t_currency,
+            width=5,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.box_currency.grid(row=2, column=2, padx=5, pady=5, sticky="SW")
+        self.box_currency.current(0)
+        # Cantidad del producto.
+        l_qty = tk.Label(detail_frame, text="Cantidad", font= self.font_style)
+        l_qty.grid(row=3, column=0, padx=5, pady=5, sticky="SW")
+        self.e_prod_qty = ttk.Entry(
+            detail_frame,
+            width=10,
+            textvariable= self._product_price,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.e_prod_qty.grid(row=3, column=1, padx=5, pady=5, sticky="SW")
+        # Medicion del producto.
+        self.box_size = ttk.Combobox(
+            detail_frame,
+            values= self.t_size,
+            width=5,
+            font= self.font_style,
+            state= tk.DISABLED
+        )
+        self.box_size.grid(row=3, column=2, padx=5, pady=5, sticky="SW")
+        self.box_size.current(0)
+        # Descripcion del producto.
+        l_description = tk.Label(detail_frame, text="Descripcion", font= self.font_style)
+        l_description.grid(row=1, column=3, padx=5, pady=5, sticky="SW")
+        self.box_description = scrolledtext.ScrolledText(
+            detail_frame,
+            width=50,
+            height= 5,
+            font= self.font_style,
+            state = tk.DISABLED
+        )
+        self.box_description.grid(row=2,column=3, padx=5, pady=5, sticky="NW", rowspan=3, columnspan=3)
 
 ### Funciones para la tabla de productos.
     def _load_products(self, key = None):

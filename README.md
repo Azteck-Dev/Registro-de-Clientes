@@ -12,4 +12,12 @@ control de ingresos de los productos.
 2. Tk Interface
 3. POO
 4. SQLite
-5. Loggin
+
+## App en ejecución
+---
+> Ingresar un nuevo cliente.
+![New Client](Example/new_client_win.png "Agregar Cliente")
+> Busqueda de clientes.
+![Search Client](Example/searh_win.png "Busqueda de clientes")
+![Search Client](Example/searh_win_results.png "Busqueda de clientes")
+

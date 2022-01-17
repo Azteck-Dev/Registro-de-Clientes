@@ -1,7 +1,6 @@
-### Code by: J.Mesach Venegas
-### email: mesach.venegas@gmail.com
-from tkinter import PhotoImage, TclError, Tk, font, messagebox, scrolledtext, ttk, filedialog
-from turtle import width
+# Code by: J.Mesach Venegas
+# email: mesach.venegas@gmail.com
+from tkinter import PhotoImage, TclError, Tk, messagebox, scrolledtext, ttk, filedialog
 from Module.productos import Producto
 from search_window import SearchWin
 from NewClient_window import NewClient
@@ -77,6 +76,7 @@ class MainWindow(Tk):
         self._product_in = tk.StringVar(value= None)
         self._product_out = tk.StringVar(value= None)
         self._product_lote = tk.StringVar(value= None)
+        self._product_qty = tk.DoubleVar(value= None)
         # Dimensiones de la ventana.
         width = 900
         height = 540
@@ -481,6 +481,15 @@ class MainWindow(Tk):
         self._prod_info()
 
     def _prod_info(self, producto:Producto = None):
+        if producto:
+            self._product_name = tk.StringVar(value= producto.name)
+            self._product_lote = tk.StringVar(value= producto.prod_id)
+            self._product_folio = tk.StringVar(value= producto.folio)
+            self._product_qty = tk.StringVar(value= producto.cantidad)
+            self._product_price = tk.StringVar(value= producto.cost)
+            self._product_description = tk.StringVar(value= producto.description)
+            self._product_in = tk.StringVar(value= producto.f_in)
+            self._product_out = tk.StringVar(value= producto.f_out)
         self.t_currency = ["None", "dlls", "mxn"]
         self.t_size = ["None","kgs","pzs","lts"]
         detail_frame = tk.Frame(self.prod_frame)
@@ -558,7 +567,7 @@ class MainWindow(Tk):
         self.e_prod_qty = ttk.Entry(
             detail_frame,
             width=10,
-            textvariable= self._product_price,
+            textvariable= self._product_qty,
             font= self.font_style,
             state= tk.DISABLED
         )

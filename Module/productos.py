@@ -79,20 +79,21 @@ class Producto:
 
     def __str__(self) :
         return f'''Producto:
-ID: {self._id}
+Cliente: {self._id}
 Folio: {self._folio}
-Prod ID: {self._prod_id}
+Lote: {self._prod_id}
 Nombre: {self._name}
-Descripcion: {self._description}
 Cantidad: {self._cantidad} {self._size}
 Costo: {self._cost} {self._currency}
 Ingreso: {self._f_in}
-Salida: {self._f_out}
+Descripcion: {self._description}
     '''
 
 if __name__ == '__main__':
     prod = Producto('CN-1702JHVS8242','7044','Jalapeño', 'Chile verde',11.20,currency="mxn",size="kgs", cantidad=10)
     prod.dateInOut('in')
     prod.dateInOut('out')
+    prod.size = "pzs"
     print(prod)
+
 

@@ -306,12 +306,14 @@ class DaoProduct:
             prod.cantidad,
             prod.cost,
             prod.f_in,
-            prod.f_out
+            prod.f_out,
+            prod.currency,
+            prod.size
         )
         with AccessDB() as cursor:
             cursor.execute('''INSERT INTO
-                Productos(id_clave, prod_id, folio, nombre, descripcion, cantidad, costo, F_ingreso, F_out)
-                VALUES(?,?,?,?,?,?,?,?,?)''', cls._product_in
+                Productos(id_clave, prod_id, folio, nombre, descripcion, cantidad, costo, F_ingreso, F_out,currency, size)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?)''', cls._product_in
             )
             log.info(f'{cursor.rowcount} producto ha sido registrado')
 

@@ -89,18 +89,18 @@ class MainWindow(Tk):
         self._product_lote = tk.StringVar(value= None)
         self._product_qty = tk.DoubleVar(value= None)
         # Dimensiones de la ventana.
-        width = 900
-        height = 540
+        width = 750
+        height = 670
         x = self.winfo_screenwidth() // 2 - width // 2
-        y = self.winfo_screenheight() // 2 - height // 2
+        y = self.winfo_screenheight() // 2 - height // 2 - 35
         position = f"{width}x{height}+{x}+{y}"
         # Propiedades de la ventana.
         self.geometry(position)
         self.title("Clientes")
         self.iconbitmap(icon)
-        self.resizable(1,1)
+        self.resizable(0,0)
+        self.minsize(width,height)
         self.state('zoomed')
-        self.wm_minsize(width, height)
         # Propiedades del grid.
         self.rowconfigure(0, weight=1)
         self.columnconfigure(2, weight=1)
@@ -440,14 +440,14 @@ class MainWindow(Tk):
     def _tab_frame(self, cliente: Client = None):
         self.prod_frame = tk.LabelFrame(self, text="Productos")
         self.prod_frame.grid(row=0, column=2, padx=5, pady=5, sticky='NSEW')
-        type_search = ["Seleccionar","Cliente","Producto"]
+        type_search = ["Seleccionar","Folio","Producto"]
         # Busqueda
         l_search_type = tk.Label(self.prod_frame, text="Buscar por", font=("arial",10,'bold'))
         l_search_type.grid(row=0, column=0, padx=5, pady=5, sticky='SE')
         self.e_type_box = ttk.Combobox(self.prod_frame, values=type_search, width=10)
         self.e_type_box.grid(row=0, column=1, padx=5, pady=5, sticky="SW")
         self.e_type_box.current(0)
-        l_text_search = tk.Label(self.prod_frame, text="Cliente/Producto", font=("arial",10,'bold'))
+        l_text_search = tk.Label(self.prod_frame, text="Folio/Producto", font=("arial",10,'bold'))
         l_text_search.grid(row=1, column=0, padx=5, pady=5, sticky='SE')
         self.e_text_search = ttk.Entry(self.prod_frame, width=30, justify='left')
         self.e_text_search.grid(row=1, column=1,padx=5, pady=5, sticky="SW")
@@ -464,7 +464,7 @@ class MainWindow(Tk):
             self.prod_frame,
             columns=("folio","name","cost","qty","in","out"),
             show='headings',
-            height=10
+            height=13
         )
         self.tabla_productos.grid(row=2, column=0, padx=5, pady=5, sticky="NSEW",columnspan=3)
         # Columnas de la tabla.
@@ -621,7 +621,8 @@ class MainWindow(Tk):
         self.box_description.grid(row=2,column=3, padx=5, pady=5, sticky="NW", rowspan=3, columnspan=3)
         if producto:
             self.box_description.config(state= tk.NORMAL)
-            self.box_description.insert('1.0',producto.description)
+            if producto.description:
+                self.box_description.insert('1.0',producto.description)
             self.box_description.config(state= tk.DISABLED)
 
     # Botones de interacion CRUD de los productos.
@@ -630,13 +631,18 @@ class MainWindow(Tk):
         self.frame_crud = ttk.Frame(self.prod_frame)
         self.frame_crud.grid(row=5, column=0, padx=5, pady=5, columnspan=4, sticky="EW")
         # Estado de los botones según si hay producto o no.
-        if producto:
+        if self._client is None:
+            state_new_btn = tk.DISABLED
+            state_delete_btn = tk.DISABLED
+            state_change_btn = tk.DISABLED
+            state_save_btn = tk.DISABLED
+        elif self._client and producto:
             state_new_btn = tk.NORMAL
             state_delete_btn = tk.NORMAL
             state_change_btn = tk.NORMAL
             state_save_btn = tk.DISABLED
         else:
-            state_new_btn = tk.DISABLED
+            state_new_btn = tk.NORMAL
             state_delete_btn = tk.DISABLED
             state_change_btn = tk.DISABLED
             state_save_btn = tk.DISABLED
@@ -647,6 +653,7 @@ class MainWindow(Tk):
             state= state_new_btn,
             image= self._new_prod,
             compound='left',
+            command= self._add_product
         )
         self.btn_new_product.grid(row=0, column=0, padx=7, pady=7, sticky="EW")
         # Boton de eliminar producto.
@@ -655,7 +662,8 @@ class MainWindow(Tk):
             text="Eliminar",
             state= state_delete_btn,
             image= self._delete_prod,
-            compound='left'
+            compound='left',
+            command= self._delete_product
         )
         self.btn_delete_product.grid(row=0, column=1, padx=7, pady=7, sticky="EW")
         # Boton de edición de producto.
@@ -664,7 +672,8 @@ class MainWindow(Tk):
             text="Actualizar",
             state= state_change_btn,
             image= self._update_prod,
-            compound= 'left'
+            compound= 'left',
+            command= self._update_product
         )
         self.btn_edit_product.grid(row=0, column=3, padx=7, pady=7, sticky="EW")
         # Boton de gardado de cambios.
@@ -673,9 +682,97 @@ class MainWindow(Tk):
             text="Guardar",
             state= state_save_btn,
             image= self._save_prod,
-            compound='left'
+            compound='left',
+            command= self._save_changes_product
         )
         self.btn_save_changes_prod.grid(row=0, column=4, padx=7, pady=7, sticky="EW")
+
+### Funciones para botonera crud de productos.
+    def _add_product(self):
+        # Activación de los campos.
+        self.e_prod_name.config(state= tk.NORMAL)
+        self.e_prod_lote.config(state= tk.NORMAL)
+        self.e_prod_clave.config(state= tk.NORMAL)
+        self.e_prod_qty.config(state= tk.NORMAL)
+        self.e_prod_cost.config(state= tk.NORMAL)
+        self.e_prod_folio.config(state= tk.NORMAL)
+        self.box_description.config(state= tk.NORMAL)
+        self.box_currency.config(state= tk.NORMAL)
+        self.box_size.config(state= tk.NORMAL)
+        # Limpieza del contenido de los campos.
+        if not self.e_prod_clave.get():
+            self.e_prod_clave.insert(0,self._client.clave)
+            self.e_prod_clave.config(state= tk.DISABLED)
+        else:
+            self.e_prod_clave.config(state= tk.DISABLED)
+        self.e_prod_name.delete(0,tk.END)
+        self.e_prod_lote.delete(0,tk.END)
+        self.e_prod_lote.config(state= tk.DISABLED)
+        self.e_prod_qty.delete(0,tk.END)
+        self.e_prod_cost.delete(0,tk.END)
+        self.e_prod_folio.delete(0,tk.END)
+        self.box_description.delete('1.0', tk.END)
+        self.box_currency.current(0)
+        self.box_size.current(0)
+        self.e_prod_folio.focus()
+        # Cambio de estado de la botonera.
+        self.btn_new_product.config(state= tk.DISABLED)
+        self.btn_save_changes_prod.config(state= tk.NORMAL)
+
+    def _delete_product(self):
+        try:
+            DaoProduct.prodDel(self.product.prod_id)
+            self._product_name = tk.StringVar(value= None)
+            self._product_folio = tk.IntVar(value= None)
+            self._product_key = tk.StringVar(value= None)
+            self._product_description = tk.StringVar(value= None)
+            self._product_price = tk.DoubleVar(value= None)
+            self._product_in = tk.StringVar(value= None)
+            self._product_out = tk.StringVar(value= None)
+            self._product_lote = tk.StringVar(value= None)
+            self._product_qty = tk.DoubleVar(value= None)
+            self._tab_frame(self._client)
+        except Exception as ex:
+            messagebox.showerror("Error",ex)
+
+    def _update_product(self):
+        pass
+
+    def _save_changes_product(self):
+        # Obtención de información en los campos
+        nombre = self.e_prod_name.get()
+        clave = self.e_prod_clave.get()
+        qty = self.e_prod_qty.get()
+        precio = self.e_prod_cost.get()
+        folio = self.e_prod_folio.get()
+        descripcion = self.box_description.get('1.0', tk.END)
+        moneda = self.box_currency.get()
+        qty_size = self.box_size.get()
+        if nombre and qty and folio and qty_size != "None":
+            prod_in = Producto(
+                name= nombre.title(),
+                folio= folio.strip(),
+                description= descripcion.capitalize(),
+                currency= moneda.strip(),
+                id= clave.strip(),
+                cost= precio.strip(),
+                cantidad= qty.strip(),
+                size= qty_size.strip(),
+            )
+            prod_in.dateInOut('in')
+            answer = messagebox.askyesnocancel("Nuevo Producto",f"Producto a ingresar esta seguro de la información?\n\n{prod_in}")
+            if answer:
+                try:
+                    DaoProduct.prod_reg(prod_in)
+                    self._tab_frame(self._client)
+                except Exception as ex:
+                    messagebox.showerror("Error",ex)
+            elif answer is None:
+                pass
+            else:
+                pass
+        else:
+            messagebox.showwarning("Campos Obligatorios","Debe ingresar como mínimo el folio, nombre del producto y la cantidad")
 
 ### Funciones para la tabla de productos.
     def _load_products(self, key = None):
@@ -714,7 +811,9 @@ class MainWindow(Tk):
         if item:
             try:
                 result = DaoProduct.search(search='product',folio=item["text"])
-                if result:
+            except Exception as ex:
+                messagebox.showerror("Error",ex)
+            if result:
                     for dat in result:
                         self.product = Producto(
                                 id= dat[0],
@@ -730,8 +829,6 @@ class MainWindow(Tk):
                                 f_out= dat[10]
                             )
                     self._prod_info(self.product)
-            except Exception as ex:
-                messagebox.showerror("Error",ex)
 
 ### Funciones para la carga de las notas en la tabla.
     def _text_note(self, event):
@@ -780,7 +877,6 @@ class MainWindow(Tk):
                     self._cont_note.append(info)
                     self._head_notas = [info.titulo, info.f_ingreso]
                     self.tabla_notas.insert("", tk.END, values= self._head_notas, text=info.id)
-
 
 ### Funciones Botonera de acciones para las notas ###
     def _create_note(self):

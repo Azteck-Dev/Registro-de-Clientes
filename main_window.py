@@ -488,15 +488,15 @@ class MainWindow(Tk):
                             f_in= dat[7],
                             f_out= dat[8]
                         )
-                    prod_info = [
-                        self._product.folio,
-                        self._product.name,
-                        self._product.cost,
-                        self._product.cantidad,
-                        self._product.f_in,
-                        self._product.f_out
-                    ]
-                    self.tabla_productos.insert("", tk.END, values= prod_info, text= self._product.prod_id)
+                        prod_info = [
+                            self._product.folio,
+                            self._product.name,
+                            self._product.cost,
+                            self._product.cantidad,
+                            self._product.f_in,
+                            self._product.f_out
+                        ]
+                        self.tabla_productos.insert("", tk.END, values= prod_info, text= self._product.prod_id)
             except Exception as ex:
                 messagebox.showerror("Error", ex)
 

@@ -1,5 +1,6 @@
 # Code by: J.Mesach Venegas
 # email: mesach.venegas@gmail.com
+from math import prod
 from tkinter import PhotoImage, TclError, Tk, messagebox, scrolledtext, ttk, filedialog
 from Module.productos import Producto
 from search_window import SearchWin
@@ -50,7 +51,8 @@ class MainWindow(Tk):
         self._search_prod = PhotoImage(file= search_prod)
         # Variables.
         self._client = None
-        self._product = None
+        self._products = None
+        self.product = None
         self._head_notas = []
         self._cont_note = []
         self._content = None
@@ -474,15 +476,18 @@ class MainWindow(Tk):
         scrollbar = ttk.Scrollbar(self.prod_frame, orient=tk.VERTICAL, command=self.tabla_productos.yview)
         self.tabla_productos.configure(yscrollcommand=scrollbar.set)
         scrollbar.grid(row=2, column=3, sticky="NS")
+        self.tabla_productos.bind("<Double 1>", self._select_product)
         # Carga de productos en la tabla
         if cliente:
             self._load_products(cliente.clave)
         # Información detallada del producto.
         self._prod_info()
 
+    # Frame donde se desglosan los datos del producto.
     def _prod_info(self, producto:Producto = None):
         if producto:
             self._product_name = tk.StringVar(value= producto.name)
+            self._product_key = tk.StringVar(value= producto.id)
             self._product_lote = tk.StringVar(value= producto.prod_id)
             self._product_folio = tk.StringVar(value= producto.folio)
             self._product_qty = tk.StringVar(value= producto.cantidad)
@@ -490,8 +495,12 @@ class MainWindow(Tk):
             self._product_description = tk.StringVar(value= producto.description)
             self._product_in = tk.StringVar(value= producto.f_in)
             self._product_out = tk.StringVar(value= producto.f_out)
+            index_currency = self.t_currency.index(producto.currency)
+            index_size = self.t_size.index(producto.size)
+        # Valores de las combo box
         self.t_currency = ["None", "dlls", "mxn"]
         self.t_size = ["None","kgs","pzs","lts"]
+        # Frame contendor de la información.
         detail_frame = tk.Frame(self.prod_frame)
         detail_frame.grid(row=4, column=0, padx=5, pady=5, sticky="NSEW", columnspan=4)
         # Folio del producto.
@@ -560,7 +569,6 @@ class MainWindow(Tk):
             state= tk.DISABLED
         )
         self.box_currency.grid(row=2, column=2, padx=5, pady=5, sticky="SW")
-        self.box_currency.current(0)
         # Cantidad del producto.
         l_qty = tk.Label(detail_frame, text="Cantidad", font= self.font_style)
         l_qty.grid(row=3, column=0, padx=5, pady=5, sticky="SW")
@@ -581,7 +589,12 @@ class MainWindow(Tk):
             state= tk.DISABLED
         )
         self.box_size.grid(row=3, column=2, padx=5, pady=5, sticky="SW")
-        self.box_size.current(0)
+        if producto:
+            self.box_currency.current(index_currency)
+            self.box_size.current(index_size)
+        else:
+            self.box_currency.current(0)
+            self.box_size.current(0)
         # Descripcion del producto.
         l_description = tk.Label(detail_frame, text="Descripcion", font= self.font_style)
         l_description.grid(row=1, column=3, padx=5, pady=5, sticky="SW")
@@ -590,9 +603,14 @@ class MainWindow(Tk):
             width=50,
             height= 5,
             font= self.font_style,
-            state = tk.DISABLED
+            state = tk.DISABLED,
+            border = 0
         )
         self.box_description.grid(row=2,column=3, padx=5, pady=5, sticky="NW", rowspan=3, columnspan=3)
+        if producto:
+            self.box_description.config(state= tk.NORMAL)
+            self.box_description.insert('1.0',producto.description)
+            self.box_description.config(state= tk.DISABLED)
 
 ### Funciones para la tabla de productos.
     def _load_products(self, key = None):
@@ -601,28 +619,54 @@ class MainWindow(Tk):
                 resultados = DaoProduct.search(search="client", id= key)
                 if resultados:
                     for dat in resultados:
-                        self._product = Producto(
+                        self._products = Producto(
                             id= dat[0],
                             prod_id= dat[1],
                             folio= dat[2],
                             name= dat[3],
                             description= dat[4],
                             cantidad= dat[5],
-                            cost= dat[6],
-                            f_in= dat[7],
-                            f_out= dat[8]
+                            size= dat[6],
+                            cost= dat[7],
+                            currency= dat[8],
+                            f_in= dat[9],
+                            f_out= dat[10]
                         )
                         prod_info = [
-                            self._product.folio,
-                            self._product.name,
-                            self._product.cost,
-                            self._product.cantidad,
-                            self._product.f_in,
-                            self._product.f_out
+                            self._products.folio,
+                            self._products.name,
+                            (self._products.cost, self._products.currency),
+                            (self._products.cantidad,self._products.size),
+                            self._products.f_in,
+                            self._products.f_out
                         ]
-                        self.tabla_productos.insert("", tk.END, values= prod_info, text= self._product.prod_id)
+                        self.tabla_productos.insert("", tk.END, values= prod_info, text= self._products.folio)
             except Exception as ex:
                 messagebox.showerror("Error", ex)
+
+    def _select_product(self, event):
+        item = self.tabla_productos.item(self.tabla_productos.selection())
+        if item:
+            try:
+                result = DaoProduct.search(search='product',folio=item["text"])
+                if result:
+                    for dat in result:
+                        self.product = Producto(
+                                id= dat[0],
+                                prod_id= dat[1],
+                                folio= dat[2],
+                                name= dat[3],
+                                description= dat[4],
+                                cantidad= dat[5],
+                                size= dat[6],
+                                cost= dat[7],
+                                currency= dat[8],
+                                f_in= dat[9],
+                                f_out= dat[10]
+                            )
+                    self._prod_info(self.product)
+            except Exception as ex:
+                messagebox.showerror("Error",ex)
 
 ### Funciones para la carga de las notas en la tabla.
     def _text_note(self, event):
@@ -877,6 +921,15 @@ class MainWindow(Tk):
         self._type = tk.StringVar(value= None)
         self._location = tk.StringVar(value= None)
         self._date = tk.StringVar(value= None)
+        self._product_name = tk.StringVar(value= None)
+        self._product_folio = tk.IntVar(value= None)
+        self._product_key = tk.StringVar(value= None)
+        self._product_description = tk.StringVar(value= None)
+        self._product_price = tk.DoubleVar(value= None)
+        self._product_in = tk.StringVar(value= None)
+        self._product_out = tk.StringVar(value= None)
+        self._product_lote = tk.StringVar(value= None)
+        self._product_qty = tk.DoubleVar(value= None)
         self._data_client()
         self._tab_frame()
         self.edit_btn.config(state='disabled')

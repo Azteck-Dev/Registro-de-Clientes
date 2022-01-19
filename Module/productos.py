@@ -23,21 +23,39 @@ class Producto:
     @property
     def folio(self):
         return self._folio
+    @folio.setter
+    def folio(self, value):
+        self._folio = value
     @property
     def name(self):
         return self._name
+    @name.setter
+    def name(self, value):
+        self._name = value
     @property
     def description(self):
         return self._description
+    @description.setter
+    def description(self, value):
+        self._description = value
     @property
     def cost(self):
         return self._cost
+    @cost.setter
+    def cost(self, value):
+        self._cost = value
     @property
     def f_in(self):
         return self._f_in
+    @f_in.setter
+    def f_in(self, date):
+        self._f_in = date
     @property
     def f_out(self):
         return self._f_out
+    @f_out.setter
+    def f_out(self, date):
+        self._f_out = date
     @property
     def cantidad(self):
         return self._cantidad
@@ -67,7 +85,7 @@ class Producto:
 
     def dateInOut(self, type:str = 'in'):
         dat = datetime.now()
-        fecha = dat.strftime('%d-%m-%Y')
+        fecha = dat.strftime('%Y-%m-%d')
         if type == 'in':
             if not self._f_in:
                 self._f_in = fecha

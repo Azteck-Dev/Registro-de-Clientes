@@ -42,7 +42,7 @@ class Notas:
 
     def _notaIn(self, f_ingreso):
         dat = datetime.now()
-        fecha = dat.strftime('%d-%m-%Y')
+        fecha = dat.strftime('%Y-%m-%d')
         if not f_ingreso:
             return fecha
         else:

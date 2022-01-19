@@ -116,7 +116,7 @@ class DaoClient:
             bool: True / False.
         """
         fecha = datetime.now()
-        cliente.date = fecha.strftime('%d-%m-%Y')
+        cliente.date = fecha.strftime('%Y-%m-%d')
         cls._data_in = (
             cliente.clave,
             cliente.name,
@@ -340,7 +340,7 @@ class DaoProduct:
         elif search == 'client'  and id:
             cls._products = (id,)
             with AccessDB() as cursor:
-                cursor.execute("SELECT * FROM Productos WHERE id_clave = ?", cls._products)
+                cursor.execute("SELECT * FROM Productos WHERE id_clave = ? ORDER BY folio DESC", cls._products)
                 cls._result = cursor.fetchall()
                 return cls._check_point(cls._result)
 
@@ -361,9 +361,9 @@ class DaoProduct:
             match field:
                 # Actualizar todos los campos.
                 case 'all':
-                    cls._products = (prod.name, prod.description, prod.cantidad, prod.cost, prod.f_out, prod.prod_id)
+                    cls._products = (prod.name, prod.description, prod.cantidad, prod.cost, prod.f_out, prod.folio, prod.currency, prod.size, prod.prod_id,)
                     with AccessDB() as cursor:
-                        cursor.execute("UPDATE Productos SET nombre = ?, descripcion = ?, cantidad = ?, costo = ?, F_out = ? WHERE prod_id = ?", cls._products)
+                        cursor.execute("UPDATE Productos SET nombre = ?, descripcion = ?, cantidad = ?, costo = ?, F_out = ?, folio = ?, currency = ?, size = ? WHERE prod_id = ?", cls._products)
                         log.info(f'{cursor.rowcount} {mns} {field}')
                 # Actualizar la cantidad en inventario.
                 case 'cantidad':

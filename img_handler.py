@@ -6,10 +6,9 @@ class HandImg:
         self._image_path = image_path
         self._key_client = key_cliente
         self._main_dir = os.path.abspath("Sources/clients")
-        self._size = (170,150)
+        self._size = (110,90)
         self._name = None
         self._file = None
-
 
     def prepare_img(self):
         # Obtención del archivo.

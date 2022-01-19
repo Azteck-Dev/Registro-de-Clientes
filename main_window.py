@@ -1,7 +1,5 @@
 # Code by: J.Mesach Venegas
 # email: mesach.venegas@gmail.com
-from calendar import c
-from cgitb import text
 from tkinter import PhotoImage, TclError, Tk, font, messagebox, scrolledtext, ttk, filedialog
 from Module.productos import Producto
 from search_window import SearchWin
@@ -10,6 +8,7 @@ from Module.client import Client
 from Module.notas import Notas
 from Module.dao import DaoClient, DaoNotas, DaoProduct
 from datetime import datetime
+from img_handler import HandImg
 import tkinter as tk
 import os
 
@@ -683,7 +682,7 @@ class MainWindow(Tk):
             state= state_save_btn,
             image= self._save_prod,
             compound='left',
-            command= self._save_changes_product
+            command= lambda: self._save_changes_product()
         )
         self.btn_save_changes_prod.grid(row=0, column=4, padx=7, pady=7, sticky="EW")
 
@@ -717,6 +716,8 @@ class MainWindow(Tk):
         self.e_prod_folio.focus()
         # Cambio de estado de la botonera.
         self.btn_new_product.config(state= tk.DISABLED)
+        self.btn_delete_product.config(text="Cancelar", state= tk.NORMAL, command= self._cancel_create)
+        self.btn_edit_product.config(state= tk.DISABLED)
         self.btn_save_changes_prod.config(state= tk.NORMAL)
 
     def _delete_product(self):
@@ -736,9 +737,22 @@ class MainWindow(Tk):
             messagebox.showerror("Error",ex)
 
     def _update_product(self):
-        pass
+        # Activación de los campos.
+        self.e_prod_name.config(state= tk.NORMAL)
+        self.e_prod_qty.config(state= tk.NORMAL)
+        self.e_prod_cost.config(state= tk.NORMAL)
+        self.e_prod_folio.config(state= tk.NORMAL)
+        self.box_description.config(state= tk.NORMAL)
+        self.box_currency.config(state= tk.NORMAL)
+        self.box_size.config(state= tk.NORMAL)
+        # Desactivacíon de botones no necesarios.
+        self.btn_new_product.config(state= tk.DISABLED)
+        self.btn_edit_product.config(state= tk.DISABLED)
+        # Activación de guardado y cancelación de actualización.
+        self.btn_save_changes_prod.config(state= tk.NORMAL, command= lambda: self._save_changes_product(False))
+        self.btn_delete_product.config(text="Cancelar", command= lambda: self._cancel_create(create= False))
 
-    def _save_changes_product(self):
+    def _save_changes_product(self, new = True):
         # Obtención de información en los campos
         nombre = self.e_prod_name.get()
         clave = self.e_prod_clave.get()
@@ -748,31 +762,100 @@ class MainWindow(Tk):
         descripcion = self.box_description.get('1.0', tk.END)
         moneda = self.box_currency.get()
         qty_size = self.box_size.get()
-        if nombre and qty and folio and qty_size != "None":
-            prod_in = Producto(
-                name= nombre.title(),
-                folio= folio.strip(),
-                description= descripcion.capitalize(),
-                currency= moneda.strip(),
-                id= clave.strip(),
-                cost= precio.strip(),
-                cantidad= qty.strip(),
-                size= qty_size.strip(),
-            )
-            prod_in.dateInOut('in')
-            answer = messagebox.askyesnocancel("Nuevo Producto",f"Producto a ingresar esta seguro de la información?\n\n{prod_in}")
+        if new:
+            if nombre and qty and folio and qty_size != "None":
+                prod_in = Producto(
+                    name= nombre.title(),
+                    folio= folio.strip(),
+                    description= descripcion.capitalize(),
+                    currency= moneda.strip(),
+                    id= clave.strip(),
+                    cost= precio.strip(),
+                    cantidad= qty.strip(),
+                    size= qty_size.strip(),
+                )
+                prod_in.dateInOut('in')
+                answer = messagebox.askyesnocancel("Nuevo Producto",f"Producto a ingresar esta seguro de la información?\n\n{prod_in}")
+                if answer:
+                    try:
+                        DaoProduct.prod_reg(prod_in)
+                        self._tab_frame(self._client)
+                    except Exception as ex:
+                        messagebox.showerror("Error",ex)
+                elif answer is None:
+                    self._cancel_create()
+                else:
+                    return
+            else:
+                messagebox.showwarning("Campos Obligatorios","Debe ingresar como mínimo el folio, nombre del producto y la cantidad")
+        else:
+            self.product.name = nombre
+            self.product.cantidad = qty
+            self.product.cost = precio
+            self.product.folio = folio
+            self.product.description = descripcion
+            self.product.currency = moneda
+            self.product.size = qty_size
+            answer = messagebox.askokcancel("Confirmación", f"{self.product}")
             if answer:
                 try:
-                    DaoProduct.prod_reg(prod_in)
+                    DaoProduct.prodUpdate(self.product, 'all')
+                    messagebox.showinfo("Correcto","Actualizado correctamente.")
                     self._tab_frame(self._client)
                 except Exception as ex:
                     messagebox.showerror("Error",ex)
-            elif answer is None:
-                pass
             else:
-                pass
+                self._cancel_create(False)
+
+    def _cancel_create(self, create = True):
+        if create:
+            # Limpieza del contenido de los campos.
+            self.e_prod_clave.config(state= tk.NORMAL)
+            self.e_prod_clave.delete(0, tk.END)
+            self.e_prod_name.delete(0,tk.END)
+            self.e_prod_lote.delete(0,tk.END)
+            self.e_prod_lote.config(state= tk.DISABLED)
+            self.e_prod_qty.delete(0,tk.END)
+            self.e_prod_cost.delete(0,tk.END)
+            self.e_prod_folio.delete(0,tk.END)
+            self.box_description.delete('1.0', tk.END)
+            self.box_currency.current(0)
+            self.box_size.current(0)
+            self.e_prod_folio.focus()
+            # Deshabilitacion de campos.
+            self.e_prod_clave.config(state= tk.DISABLED)
+            self.e_prod_name.config(state= tk.DISABLED)
+            self.e_prod_lote.config(state= tk.DISABLED)
+            self.e_prod_lote.config(state= tk.DISABLED)
+            self.e_prod_qty.config(state= tk.DISABLED)
+            self.e_prod_cost.config(state= tk.DISABLED)
+            self.e_prod_folio.config(state= tk.DISABLED)
+            self.box_description.config(state= tk.DISABLED)
+            self.box_currency.config(state= tk.DISABLED)
+            self.box_size.config(state= tk.DISABLED)
+            # Cambio de estado de botonera
+            self.btn_new_product.config(state= tk.NORMAL)
+            self.btn_delete_product.config(state= tk.DISABLED, text="Eliminar", command= self._update_product)
+            self.btn_edit_product.config(state= tk.DISABLED)
+            self.btn_save_changes_prod.config(state= tk.DISABLED)
         else:
-            messagebox.showwarning("Campos Obligatorios","Debe ingresar como mínimo el folio, nombre del producto y la cantidad")
+            # Deshabilitacion de campos.
+            self.e_prod_clave.config(state= tk.DISABLED)
+            self.e_prod_name.config(state= tk.DISABLED)
+            self.e_prod_lote.config(state= tk.DISABLED)
+            self.e_prod_lote.config(state= tk.DISABLED)
+            self.e_prod_qty.config(state= tk.DISABLED)
+            self.e_prod_cost.config(state= tk.DISABLED)
+            self.e_prod_folio.config(state= tk.DISABLED)
+            self.box_description.config(state= tk.DISABLED)
+            self.box_currency.config(state= tk.DISABLED)
+            self.box_size.config(state= tk.DISABLED)
+            # Cambio de estado de botonera.
+            self.btn_new_product.config(state= tk.NORMAL)
+            self.btn_delete_product.config(state= tk.NORMAL, command= lambda: self._cancel_create(), text= "Eliminar")
+            self.btn_edit_product.config(state= tk.NORMAL)
+            self.btn_save_changes_prod.config(state= tk.DISABLED, command= lambda: self._save_changes_product())
+
 
 ### Funciones para la tabla de productos.
     def _load_products(self, key = None):
@@ -1106,7 +1189,8 @@ class MainWindow(Tk):
                 filetypes= (("","*.png"),("all","*"))
             )
             if img_path:
-                self._client.image = os.path.abspath(img_path)
+                image = HandImg(img_path, self._client.name).prepare_img()
+                self._client.image = image
                 self.new_img = PhotoImage(file= self._client.image)
                 self.logo.config(image= self.new_img)
         except TclError:

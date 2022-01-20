@@ -1,6 +1,6 @@
 # Code by: J.Mesach Venegas
 # email: mesach.venegas@gmail.com
-from tkinter import PhotoImage, TclError, Tk, font, messagebox, scrolledtext, ttk, filedialog
+from tkinter import PhotoImage, TclError, Tk, messagebox, scrolledtext, ttk, filedialog
 from Module.productos import Producto
 from search_window import SearchWin
 from NewClient_window import NewClient
@@ -455,7 +455,8 @@ class MainWindow(Tk):
             self.prod_frame,
             text="Buscar",
             image= self._search_prod,
-            compound='left'
+            compound='left',
+            command= self._research_prod
         )
         self.product_search_btn.grid(row=1, column=2, padx=5, pady=5, sticky='NEW')
         # Tabla de productos.
@@ -856,7 +857,6 @@ class MainWindow(Tk):
             self.btn_edit_product.config(state= tk.NORMAL)
             self.btn_save_changes_prod.config(state= tk.DISABLED, command= lambda: self._save_changes_product())
 
-
 ### Funciones para la tabla de productos.
     def _load_products(self, key = None):
         if key:
@@ -912,6 +912,93 @@ class MainWindow(Tk):
                                 f_out= dat[10]
                             )
                     self._prod_info(self.product)
+
+    def _research_prod(self):
+        tipo_busqueda = self.e_type_box.get()
+        element = self.e_text_search.get()
+        if tipo_busqueda != "Seleccionar" and element:
+            match tipo_busqueda:
+                case "Folio":
+                    if element.isdigit():
+                        # Busqueda de el producto por folio.
+                        try:
+                            resultado = DaoProduct.search_element(folio= element)
+                        except Exception as ex:
+                            messagebox.showerror("Error",ex)
+                        if resultado:
+                            # Limpieza de los elementos anteriores en la tabla.
+                            for item in self.tabla_productos.get_children():
+                                    self.tabla_productos.delete(item)
+                            # Creación de objetos producto.
+                            for dat in resultado:
+                                self._products = Producto(
+                                    id= dat[0],
+                                    prod_id= dat[1],
+                                    folio= dat[2],
+                                    name= dat[3],
+                                    description= dat[4],
+                                    cantidad= dat[5],
+                                    size= dat[6],
+                                    cost= dat[7],
+                                    currency= dat[8],
+                                    f_in= dat[9],
+                                    f_out= dat[10]
+                                )
+                                prod_info = [
+                                    self._products.folio,
+                                    self._products.name,
+                                    (self._products.cost, self._products.currency),
+                                    (self._products.cantidad,self._products.size),
+                                    self._products.f_in,
+                                    self._products.f_out
+                                ]
+                                self.tabla_productos.insert("", tk.END, values= prod_info, text= self._products.folio)
+                    else:
+                        messagebox.showerror("Valor invalido",f"Ingrese solo numero de folio")
+                case "Producto":
+                    if not element.isdigit():
+                        # Busqueda del producto por nombre.
+                        try:
+                            resultado = DaoProduct.search_element(name=element)
+                        except Exception as ex:
+                            messagebox.showerror("Error",ex)
+                        if resultado:
+                            # Limpieza de los elementos anteriores en la tabla.
+                            for item in self.tabla_productos.get_children():
+                                    self.tabla_productos.delete(item)
+                            # Creación de objetos producto.
+                            for dat in resultado:
+                                self._products = Producto(
+                                    id= dat[0],
+                                    prod_id= dat[1],
+                                    folio= dat[2],
+                                    name= dat[3],
+                                    description= dat[4],
+                                    cantidad= dat[5],
+                                    size= dat[6],
+                                    cost= dat[7],
+                                    currency= dat[8],
+                                    f_in= dat[9],
+                                    f_out= dat[10]
+                                )
+                                prod_info = [
+                                    self._products.folio,
+                                    self._products.name,
+                                    (self._products.cost, self._products.currency),
+                                    (self._products.cantidad,self._products.size),
+                                    self._products.f_in,
+                                    self._products.f_out
+                                ]
+                                self.tabla_productos.insert("", tk.END, values= prod_info, text= self._products.folio)
+                    else:
+                        messagebox.showerror("Valor invalido",f"Ingresa solo el nombre del producto.")
+        else:
+            if tipo_busqueda == "Seleccionar":
+                messagebox.showwarning("Selección","Seleccione el tipo de busqueda a realizar")
+            elif not element:
+                messagebox.showwarning("Campo vació","debe especificar la busqueda.")
+            else:
+                return
 
 ### Funciones para la carga de las notas en la tabla.
     def _text_note(self, event):
@@ -1197,4 +1284,4 @@ class MainWindow(Tk):
             messagebox.showerror("Error",f"Solo se permiten archivos en formato png\nno mayores 200x150 pixels")
 
 if __name__ == '__main__':
-    test = MainWindow()
+    main_app = MainWindow()

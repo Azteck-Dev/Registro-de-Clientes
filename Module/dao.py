@@ -298,17 +298,7 @@ class DaoProduct:
     @classmethod
     def prod_reg(cls, prod: Producto):
         cls._product_in = (
-            prod.id,
-            prod.prod_id,
-            prod.folio,
-            prod.name,
-            prod.description,
-            prod.cantidad,
-            prod.cost,
-            prod.f_in,
-            prod.f_out,
-            prod.currency,
-            prod.size
+            prod.id, prod.prod_id, prod.folio, prod.name, prod.description, prod.cantidad, prod.cost, prod.f_in, prod.f_out,prod.currency,prod.size
         )
         with AccessDB() as cursor:
             cursor.execute('''INSERT INTO
@@ -407,3 +397,12 @@ class DaoProduct:
         with AccessDB() as cursor:
             cursor.execute("DELETE FROM Productos WHERE prod_id = ?", cls._products)
             log.info(f'{cursor.rowcount} registro ha sido eliminado.')
+
+    # Busqueda general de productos.
+    @classmethod
+    def search_element(cls, name: str = None, folio:int = None):
+        element_search = (name:= f"%{name}%", folio)
+        with AccessDB() as cursor:
+            cursor.execute("SELECT * FROM Productos WHERE nombre LIKE ? or folio = ? ORDER BY F_ingreso",element_search)
+            cls._result = cursor.fetchall()
+        return cls._check_point(cls._result)

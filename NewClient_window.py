@@ -181,10 +181,8 @@ class NewClient(Toplevel):
             messagebox.showwarning(titulo, "El campo de nombre esta vació")
         if not a_paterno and not a_materno:
             messagebox.showwarning(titulo, "El campo de Apellido esta vació debe ingresar al menos un apellido.")
-        if not telefono:
-            messagebox.showwarning(titulo, "El campo de Telefono esta vació")
         # Conversion a objeto tipo cliente.
-        if nombre and telefono and a_paterno or a_materno:
+        if nombre and (a_paterno or a_materno):
             new_client = Client(
                 name= nombre.title(),
                 lastname= a_paterno.title(),

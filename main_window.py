@@ -514,7 +514,7 @@ class MainWindow(Tk):
         else:
             self._crud_product()
         self.t_currency = ["None", "dlls", "mxn"]
-        self.t_size = ["None","kgs","pzs","lts"]
+        self.t_size = ["None","kgs","pzs","lts","ton","lbs","oz","m","cm","g"]
         # Folio del producto.
         l_folio = tk.Label(detail_frame, text="Folio", justify=tk.RIGHT, font= self.font_style)
         l_folio.grid(row=0, column=0, padx=5, pady=10, sticky='NE')
@@ -765,7 +765,7 @@ class MainWindow(Tk):
         qty_size = self.box_size.get()
         if new:
             if nombre and qty and folio and qty_size != "None":
-                prod_in = Producto(
+                self.product = Producto(
                     name= nombre.title(),
                     folio= folio.strip(),
                     description= descripcion.capitalize(),
@@ -775,11 +775,11 @@ class MainWindow(Tk):
                     cantidad= qty.strip(),
                     size= qty_size.strip(),
                 )
-                prod_in.dateInOut('in')
-                answer = messagebox.askyesnocancel("Nuevo Producto",f"Producto a ingresar esta seguro de la información?\n\n{prod_in}")
+                self.product.dateInOut('in')
+                answer = messagebox.askyesnocancel("Nuevo Producto",f"Producto a ingresar esta seguro de la información?\n\n{self.product}")
                 if answer:
                     try:
-                        DaoProduct.prod_reg(prod_in)
+                        DaoProduct.prod_reg(self.product)
                         self._tab_frame(self._client)
                     except Exception as ex:
                         messagebox.showerror("Error",ex)

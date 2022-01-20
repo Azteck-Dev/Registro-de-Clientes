@@ -1041,3 +1041,9 @@
 11:19:25 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
 05:17:56 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
 05:17:56 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+06:05:31 WARNING :::dao.py::: [_check_point Line: 22] ->> Sin Cliente para mostrar
+06:06:14 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
+06:06:14 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+06:09:48 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
+06:09:48 WARNING :::dao.py::: [_check_point Line: 294] ->> Sin productos que mostrar
+06:10:58 WARNING :::dao.py::: [_check_point Line: 207] ->> Sin Notas para cargar
